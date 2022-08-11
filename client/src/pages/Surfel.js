@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Map, {Source, Layer} from "react-map-gl";
+import Map, {Source, Layer, Marker} from "react-map-gl";
 import * as mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import "./Surfel.css";
+import {IoLocationSharp} from 'react-icons/io5';
 
 
 function Surfel() {
@@ -35,7 +36,7 @@ function Surfel() {
           pitch: 80
         }}
         maxPitch={85}
-        maxZoom={50}
+        maxZoom={25}
         mapStyle="mapbox://styles/mapbox/satellite-v8"
         terrain={{source: 'mapbox-dem', exaggeration: 1}}
         //mapStyle="mapbox://styles/msude/cl0b56qxj000215qj1qgx7faq"
@@ -46,9 +47,10 @@ function Surfel() {
           type="raster-dem"
           url="mapbox://mapbox.mapbox-terrain-dem-v1"
           tileSize={512}
-          maxzoom={14}
+          
         />
-          <Layer {...skyLayer} />
+        <Layer {...skyLayer} />
+        <Marker latitude={50} longitude={100}><IoLocationSharp color="white" size={30} /></Marker>
       </Map>
     </div>
   );
