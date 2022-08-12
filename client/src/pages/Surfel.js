@@ -33,10 +33,10 @@ function Surfel() {
           longitude: -100,
           latitude: 40,
           zoom: 3.5,
-          pitch: 80
+          pitch: 0
         }}
-        maxPitch={85}
-        maxZoom={25}
+        maxPitch={70}
+        maxZoom={40}
         mapStyle="mapbox://styles/mapbox/satellite-v8"
         terrain={{source: 'mapbox-dem', exaggeration: 1}}
         //mapStyle="mapbox://styles/msude/cl0b56qxj000215qj1qgx7faq"

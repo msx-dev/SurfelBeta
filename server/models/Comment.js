@@ -6,7 +6,7 @@ const CommentSchema = new mongoose.Schema(
           type: String,
           required: true,
           min: 3,
-          max: 60,
+          max: 150,
         },
         username: {
           type: String,
