@@ -18,7 +18,11 @@ const UserSchema = new mongoose.Schema(
             type: String,
             require: true,
             min: 8,
-        }
+        },
+        /*
+        rated: {
+            type: Array
+        } */
     },
     {timestamps: true}
 );

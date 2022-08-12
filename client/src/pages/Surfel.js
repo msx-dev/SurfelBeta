@@ -50,7 +50,7 @@ function Surfel() {
           
         />
         <Layer {...skyLayer} />
-        <Marker latitude={50} longitude={100}><IoLocationSharp color="white" size={30} /></Marker>
+        <Marker latitude={50} longitude={100}><IoLocationSharp color="white" size={30}/></Marker>
       </Map>
     </div>
   );

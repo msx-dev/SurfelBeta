@@ -27,6 +27,19 @@ const PinSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
+        /* 
+        all_ratings: {
+          type: Number,
+          required: true,
+        },
+        all_ratings_sum: {
+          type: Number,
+          required: true,
+        },
+        forecastID: {
+          type: Number
+        }
+        */
       },
     {timestamps: true}
 );
