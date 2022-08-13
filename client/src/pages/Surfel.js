@@ -1,9 +1,13 @@
-import { useState } from "react";
-import Map, {Source, Layer, Marker} from "react-map-gl";
+import { useEffect, useState } from "react";
+import Map, {Source, Layer, Marker, Popup} from "react-map-gl";
 import * as mapboxgl from 'mapbox-gl';
+import axios from "axios";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import "./Surfel.css";
 import {IoLocationSharp} from 'react-icons/io5';
+import {GiWaveSurfer} from 'react-icons/gi';
+import {format} from "timeago.js";
+
 
 
 function Surfel() {
@@ -14,7 +18,26 @@ function Surfel() {
         longitude: 17.071727,
         zoom: 4,
       });
+    const [pins, setPins] = useState([]);
+    const [clickedId, setClickedId] = useState(null);
 
+    //API calls
+    useEffect(()=> {
+      const getPins = async () => {
+        try {
+          const response = await axios.get("/pins");
+          setPins(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      getPins();
+    }, [])
+
+
+    //Map Layers
     const skyLayer = {
     id: 'sky',
     type: 'sky',
@@ -24,6 +47,14 @@ function Surfel() {
         'sky-atmosphere-sun-intensity': 50
     }
     };
+
+    //Functions
+    const pinClicked = (id) => {
+      console.log("Clicked!")
+      console.log(id);
+
+      setClickedId(id);
+    }
       
   return (
     <div style={{ height: "100vh", width: "100%" }}>
@@ -50,7 +81,31 @@ function Surfel() {
           
         />
         <Layer {...skyLayer} />
-        <Marker latitude={50} longitude={100}><IoLocationSharp color="white" size={30}/></Marker>
+        {pins.map(pin =>(
+          <>
+            <Marker latitude={pin.lat} longitude={pin.long} onClick={e => {
+                pinClicked(pin._id);
+              }}>
+              <IoLocationSharp color="white" size={viewport.zoom*5}/>
+            </Marker>
+            {pin._id === clickedId && (
+              <Popup latitude={pin.lat} longitude={pin.long} anchor="left" closeOnClick={false} onClose={()=>setClickedId(null)}>
+              <div className="popup">
+                <label>Title</label>
+                <h2>{pin.title}</h2>
+                <label>Review</label>
+                <h2>{pin.description}</h2>
+                <label>Rating</label>
+                <GiWaveSurfer/>
+                <label>Info</label>
+                <span>Created by <br/>{pin.username}</span>
+                <span>{format(pin.createdAt)}</span>
+              </div>
+            </Popup>
+            )}
+          </>
+        ))}
+        
       </Map>
     </div>
   );
