@@ -62,18 +62,34 @@ function Surfel() {
     }
     
     const addMarker = (e) => {
-      console.log(e.lngLat.lng);
       const newLong = e.lngLat.lng;
       const newLat = e.lngLat.lat;
       setNewPin({
         lat: newLat,
         long: newLong
       });
-
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
+      console.log(newPin.lat)
+      e.preventDefault();
+      const savePin = {
+        username: currentUser,
+        description: review,
+        rating: rating,
+        lat: newPin.lat,
+        long: newPin.long,
+        title: title
+      }
 
+      try {
+        const response = await axios.post("/pins", savePin);
+        console.log(response.data)
+        setPins([...pins, response.data]);
+        setNewPin(null);
+      } catch (error) {
+        console.log(error);
+      }
     }
       
   return (
@@ -122,7 +138,7 @@ function Surfel() {
                 <label>Review</label>
                 <h2>{pin.description}</h2>
                 <label>Rating</label>
-                <GiWaveSurfer/>
+                {Array(pin.rating).fill(<GiWaveSurfer/>)}
                 <label>Info</label>
                 <span>Created by <br/>{pin.username}</span>
                 <span>{format(pin.createdAt)}</span>
@@ -134,7 +150,7 @@ function Surfel() {
         {newPin && (
           <Popup latitude={newPin.lat} longitude={newPin.long} anchor="left" closeOnClick={false} onClose={()=>setNewPin(null)}>
               <div className="popup-add">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={(e)=> handleSubmit(e)}>
                   <label>Title</label>
                   <input placeholder="title" onChange={(e) => setTitle(e.target.value)}/>
                   <label>Review</label>
@@ -153,6 +169,9 @@ function Surfel() {
               </div>
             </Popup>
         )}
+        <button className="button">Log Out</button>
+        <button className="button">Login</button>
+        <button className="button">Register</button>
         
       </Map>
     </div>

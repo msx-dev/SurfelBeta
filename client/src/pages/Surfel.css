@@ -10,3 +10,8 @@
     width: 100vw;
     height: 100vh;
 }
+
+.button{
+    z-index: 10;
+    position: relative;
+}
