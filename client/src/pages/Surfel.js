@@ -7,10 +7,13 @@ import "./Surfel.css";
 import {IoLocationSharp} from 'react-icons/io5';
 import {GiWaveSurfer} from 'react-icons/gi';
 import {format} from "timeago.js";
+import Register from "../components/Register";
+import Login from "../components/Login";
 
 
 
 function Surfel() {
+  const storedData = window.localStorage;
   const {current: map} = useMap();
   const [viewState, setViewState] = useState({
         width: "100vw",
@@ -25,7 +28,9 @@ function Surfel() {
     const [title, setTitle] = useState("");
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(1);
-    const currentUser = "Mark";
+    const [currentUser, setCurrentUser] = useState(storedData.getItem("user"));
+    const [register, setRegister] = useState(false);
+    const [login, setLogin] = useState(false);
     
 
     //API calls
@@ -91,6 +96,12 @@ function Surfel() {
         console.log(error);
       }
     }
+
+    const handleLogout = () => {
+      storedData.removeItem("user");
+      storedData.removeItem("u_id");
+      setCurrentUser(null);
+    }
       
   return (
     <div style={{ height: "100vh", width: "100%" }}>
@@ -128,7 +139,7 @@ function Surfel() {
             <Marker latitude={pin.lat} longitude={pin.long} onClick={e => {
                 pinClicked(pin._id, pin.lat, pin.long);
               }}>
-              <IoLocationSharp color= {currentUser === "Mark" ? "tomato" : "white"} size={"25"} cursor={"pointer"}/>
+              <IoLocationSharp color= {currentUser === pin.username ? "tomato" : "white"} size={"25"} cursor={"pointer"}/>
             </Marker>
             {pin._id === clickedId && (
               <Popup latitude={pin.lat} longitude={pin.long} anchor="left" closeOnClick={false} onClose={()=>setClickedId(null)}>
@@ -169,9 +180,19 @@ function Surfel() {
               </div>
             </Popup>
         )}
-        <button className="button">Log Out</button>
-        <button className="button">Login</button>
-        <button className="button">Register</button>
+        {currentUser ? (<button className="button" onClick={handleLogout}>Log Out</button>) 
+        : (
+          <div>
+            <button className="button" onClick={()=>setLogin(true)}>Login</button>
+            <button className="button" onClick={()=>setRegister(true)}>Register</button>
+          </div>
+        )}
+        {register && (
+          <Register/>
+        )}
+        {login && (
+          <Login storedData={storedData} setCurrentUser={setCurrentUser}/>
+        )}
         
       </Map>
     </div>
