@@ -27,6 +27,10 @@ const PinSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
+        username: {
+          type: String,
+          required: true,
+        }
         /* 
         all_ratings: {
           type: Number,
