@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import Map, {Source, Layer, Marker, Popup, useMap} from "react-map-gl";
+import { useEffect, useRef, useState } from "react";
+import Map, {Source, Layer, Marker, Popup, useMap, NavigationControl, GeolocateControl} from "react-map-gl";
 import * as mapboxgl from 'mapbox-gl';
 import axios from "axios";
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -9,12 +9,14 @@ import {GiWaveSurfer} from 'react-icons/gi';
 import {format} from "timeago.js";
 import Register from "../components/Register";
 import Login from "../components/Login";
+import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import GeocoderControl from "../components/GeocoderControl";
 
 
 
 function Surfel() {
   const storedData = window.localStorage;
-  const {current: map} = useMap();
+  const mapRef = useRef();
   const [viewState, setViewState] = useState({
         width: "100vw",
         height: "100vh",
@@ -62,7 +64,8 @@ function Surfel() {
 
     //Functions
     const pinClicked = (id, lat, long) => {
-      setViewState({...viewState, latitude: lat, longitude: long})
+      //setViewState({...viewState, latitude: lat, longitude: long});
+      mapRef.current?.flyTo({center: [long, lat], duration: 2000});
       setClickedId(id);
     }
     
@@ -102,10 +105,12 @@ function Surfel() {
       storedData.removeItem("u_id");
       setCurrentUser(null);
     }
+
       
   return (
     <div style={{ height: "100vh", width: "100%" }}>
           <Map
+          ref={mapRef}
           {...viewState}
           onMove={evt => setViewState(evt.viewState)}
           mapboxAccessToken={process.env.REACT_APP_MAPBOX}
@@ -133,6 +138,9 @@ function Surfel() {
           tileSize={512}
           
         />
+        <GeocoderControl mapboxAccessToken={process.env.REACT_APP_MAPBOX} position="top-left" />
+      <NavigationControl visualizePitch="true" showCompass="true" showZoom="true"/>
+      <GeolocateControl/>
         <Layer {...skyLayer} />
         {pins.map(pin =>(
           <>
@@ -158,7 +166,7 @@ function Surfel() {
             )}
           </>
         ))}
-        {newPin && (
+        {(newPin && currentUser) && (
           <Popup latitude={newPin.lat} longitude={newPin.long} anchor="left" closeOnClick={false} onClose={()=>setNewPin(null)}>
               <div className="popup-add">
               <form onSubmit={(e)=> handleSubmit(e)}>
