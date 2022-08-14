@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useControl, Marker } from 'react-map-gl';
+import "./GeocoderControl.css";
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 /* eslint-disable complexity,max-statements */
 export default function GeocoderControl(props) {
