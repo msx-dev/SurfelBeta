@@ -12,6 +12,18 @@ import Login from "../components/Login";
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import GeocoderControl from "../components/GeocoderControl";
 
+import Avatar1 from "../public/avatars/1.svg";
+import Avatar2 from "../public/avatars/2.svg";
+import Avatar3 from "../public/avatars/3.svg";
+import Avatar4 from "../public/avatars/4.svg";
+import Avatar5 from "../public/avatars/5.svg";
+import Avatar6 from "../public/avatars/6.svg";
+import Avatar7 from "../public/avatars/7.svg";
+import Avatar8 from "../public/avatars/8.svg";
+import Avatar9 from "../public/avatars/9.svg";
+import Avatar10 from "../public/avatars/10.svg";
+import NewSpot from "../components/NewSpot";
+
 
 
 function Surfel() {
@@ -20,9 +32,11 @@ function Surfel() {
   const [viewState, setViewState] = useState({
         width: "100vw",
         height: "100vh",
-        latitude: 47.040182,
-        longitude: 17.071727,
-        zoom: 4,
+        latitude: 29.116021063495054,
+        longitude: -13.553147307415657,
+        zoom: 14,
+        pitch: 67,
+        bearing: 50
       });
     const [pins, setPins] = useState([]);
     const [clickedId, setClickedId] = useState(null);
@@ -30,7 +44,9 @@ function Surfel() {
     const [title, setTitle] = useState("");
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(1);
+    const [newSpot, setNewSpot] = useState(false);
     const [currentUser, setCurrentUser] = useState(storedData.getItem("user"));
+    const [avatar, setAvatar] = useState(storedData.getItem("avatar"));
     const [register, setRegister] = useState(false);
     const [login, setLogin] = useState(false);
     
@@ -71,13 +87,17 @@ function Surfel() {
     }
     
     const addMarker = (e) => {
-      console.log(e);
-      const newLong = e.lngLat.lng;
-      const newLat = e.lngLat.lat;
-      setNewPin({
-        lat: newLat,
-        long: newLong
-      });
+      if(currentUser){
+        const newLong = e.lngLat.lng;
+        const newLat = e.lngLat.lat;
+        setNewPin({
+          lat: newLat,
+          long: newLong
+        });
+      }else{
+        setLogin(true);
+      }
+      
     }
 
     const handleSubmit = async (e) => {
@@ -113,27 +133,27 @@ function Surfel() {
       
   return (
     <div style={{ height: "100vh", width: "100%" }}>
-          <Map
-          ref={mapRef}
-          {...viewState}
-          onMove={evt => setViewState(evt.viewState)}
-          mapboxAccessToken={process.env.REACT_APP_MAPBOX}
-          initialViewState={{
-            longitude: -100,
-            latitude: 40,
-            zoom: 3.5,
-            pitch: 0
-          }}
-          maxPitch={70}
-          transitionDuration = "500"
-          maxZoom={40}
-          mapStyle="mapbox://styles/mapbox/satellite-v8"
-          terrain={{source: 'mapbox-dem', exaggeration: 1}}
-          //mapStyle="mapbox://styles/msude/cl0b56qxj000215qj1qgx7faq"
-          //mapStyle="mapbox://styles/msude/ckwampov11d2q15odhnlp98v6"
-          onDblClick={(e)=>addMarker(e)}
-          doubleClickZoom={false}
-          t
+      <Map
+        ref={mapRef}
+        {...viewState}
+        onMove={evt => setViewState(evt.viewState)}
+        mapboxAccessToken={process.env.REACT_APP_MAPBOX}
+        initialViewState={{
+          longitude: -100,
+          latitude: 40,
+          zoom: 3.5,
+          pitch: 0
+        }}
+        maxPitch={70}
+        transitionDuration = "500"
+        maxZoom={40}
+        mapStyle="mapbox://styles/mapbox/satellite-v8"
+        terrain={{source: 'mapbox-dem', exaggeration: 1}}
+        //mapStyle="mapbox://styles/msude/cl0b56qxj000215qj1qgx7faq"
+        //mapStyle="mapbox://styles/msude/ckwampov11d2q15odhnlp98v6"
+        onDblClick={(e)=>addMarker(e)}
+        doubleClickZoom={false}
+        
       >
       <Source
           id="mapbox-dem"
@@ -142,69 +162,84 @@ function Surfel() {
           tileSize={512}
           
         />
-        <GeocoderControl mapboxAccessToken={process.env.REACT_APP_MAPBOX} position="top-left" />
+
+      
+      {/* Map Controls and Layers*/}
+      <GeocoderControl mapboxAccessToken={process.env.REACT_APP_MAPBOX} position="top-left" />
       <NavigationControl visualizePitch="true" showCompass="true" showZoom="true"/>
-      <GeolocateControl/>
-        <Layer {...skyLayer} />
-        {pins.map(pin =>(
+      <GeolocateControl trackUserLocation="true" showUserLocation="true"/>
+      <Layer {...skyLayer} />
+
+      
+      {/* Displaying Pins */}
+        {(viewState.zoom > 10) ? (
           <>
-            <Marker latitude={pin.lat} longitude={pin.long} onClick={e => {
-                pinClicked(pin._id, pin.lat, pin.long);
-              }}>
-              <IoLocationSharp color= {currentUser === pin.username ? "tomato" : "white"} size={"25"} cursor={"pointer"}/>
-            </Marker>
-            {pin._id === clickedId && (
-              <Popup latitude={pin.lat} longitude={pin.long} anchor="left" closeOnClick={false} onClose={()=>setClickedId(null)}>
-              <div className="popup">
-                <label>Title</label>
-                <h2>{pin.title}</h2>
-                <label>Review</label>
-                <h2>{pin.description}</h2>
-                <label>Rating</label>
-                {Array(pin.rating).fill(<GiWaveSurfer/>)}
-                <label>Info</label>
-                <span>Created by <br/>{pin.username}</span>
-                <span>{format(pin.createdAt)}</span>
-              </div>
-            </Popup>
-            )}
-          </>
-        ))}
-        {(newPin && currentUser) && (
-          <Popup latitude={newPin.lat} longitude={newPin.long} anchor="left" closeOnClick={false} onClose={()=>setNewPin(null)}>
-              <div className="popup-add">
-              <form onSubmit={(e)=> handleSubmit(e)}>
+          {pins.map(pin =>(
+            <>
+              <Marker key={pin._id} latitude={pin.lat} longitude={pin.long} onClick={e => {
+                  pinClicked(pin._id, pin.lat, pin.long);
+                }}>
+                <IoLocationSharp key={pin._id} color= {currentUser === pin.username ? "tomato" : "white"} size={"25"} cursor={"pointer"}/>
+              </Marker>
+              {pin._id === clickedId && (
+                <Popup key={pin._id} latitude={pin.lat} longitude={pin.long} anchor="left" closeOnClick={false} onClose={()=>setClickedId(null)}>
+                <div className="popup">
                   <label>Title</label>
-                  <input placeholder="title" onChange={(e) => setTitle(e.target.value)}/>
+                  <h2>{pin.title}</h2>
                   <label>Review</label>
-                  <input placeholder="review" onChange={(e) => setReview(e.target.value)}/>
+                  <h2>{pin.description}</h2>
                   <label>Rating</label>
-                  <select onChange={(e) => setRating(e.target.value)}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                  <button type="submit">Add</button>
-                </form>
-                <GiWaveSurfer/>
-              </div>
-            </Popup>
-        )}
-        {currentUser ? (<button className="button" onClick={handleLogout}>Log Out</button>) 
-        : (
-          <div>
-            <button className="button" onClick={()=>{setLogin(true); setRegister(false);}}>Login</button>
-            <button className="button" onClick={()=>{setRegister(true); setLogin(false);}}>Register</button>
-          </div>
-        )}
-        {register && (
-          <Register setRegister={setRegister} storedData={storedData} setCurrentUser={setCurrentUser}/>
-        )}
-        {login && (
-          <Login storedData={storedData} setCurrentUser={setCurrentUser} setLogin={setLogin}/>
-        )}
+                  {Array(pin.rating).fill(<GiWaveSurfer/>)}
+                  <label>Info</label>
+                  <span>Created by <br/>{pin.username}</span>
+                  <span>{format(pin.createdAt)}</span>
+                </div>
+              </Popup>
+              )}
+            </>
+          ))}
+        </>
+        ) : <></>}
+        
+      
+
+      {/* Adding New Pin */}
+      {(newPin && currentUser && (!newSpot)) && (
+        <Popup latitude={newPin.lat} longitude={newPin.long} anchor="left" closeOnClick={false} onClose={()=>setNewPin(null)}>
+            <buton onClick={() => setNewSpot(true)}>Add Pin Here?</buton>
+            <buton onClick={() => setNewPin(null)}>Cancel</buton>
+            {/* */}
+          </Popup>
+      )}
+      {newPin && currentUser && newSpot && (
+        <NewSpot storedData={storedData} setPins={setPins} pins={pins} newPin={newPin} setNewPin={setNewPin}/>
+      )}
+
+      
+
+      {/* User Navigation */}
+      {currentUser ? (
+        <div className="user-controls">
+          {avatar===2 ? (
+            <img className="avatar-dropdown" src={Avatar2}/>
+          ) : (
+            <img src={Avatar1}/>
+          )}
+          <button className="button" onClick={handleLogout}>Log Out</button>
+        </div>
+        ) 
+      : (
+        <div className="user-login-register">
+          <button className="button" onClick={()=>{setLogin(true); setRegister(false);}}>Login</button>
+          <button className="button" onClick={()=>{setRegister(true); setLogin(false);}}>Register</button>
+        </div>
+      )}
+      {register && (
+        <Register setRegister={setRegister} storedData={storedData} setCurrentUser={setCurrentUser} setAvatar={setAvatar}/>
+      )}
+      {login && (
+        <Login storedData={storedData} setCurrentUser={setCurrentUser} setLogin={setLogin} setAvatar={setAvatar}/>
+      )}
         
       </Map>
     </div>

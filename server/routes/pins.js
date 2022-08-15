@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 router.post("/", async (req, res)=> {
     const pin = new Pin(req.body);
     try {
-        console.log(pin);
         const savedPin = await pin.save();
         res.status(200).json(savedPin);
     } catch (error) {

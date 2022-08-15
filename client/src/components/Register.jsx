@@ -94,6 +94,7 @@ export default function Register({setRegister, storedData, setCurrentUser}) {
     <>
         {avatarSelection === false ? (
             <div className="register-div">
+                <h1 className='cancel' onClick={()=>setRegister(false)}>X</h1>
                 <h1 className="form-heading">Register</h1>
                 <form className="register-form" onSubmit={(e) => handleSubmit(e)}>
                     <div className="register-inputs">
@@ -108,6 +109,7 @@ export default function Register({setRegister, storedData, setCurrentUser}) {
             </div>
         ) : (
             <div className="avatar-div">
+                <h1 className='cancel'>X</h1>
                 <h1 className="form-heading">Select avatar</h1>
                 <div className="avatar-options">
                     <div className="avatar-row">

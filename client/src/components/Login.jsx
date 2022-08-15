@@ -3,7 +3,7 @@ import "./Login.css";
 import React, { useRef, useState } from 'react'
 import axios from "axios";
 
-export default function Login({storedData, setCurrentUser}) {
+export default function Login({storedData, setCurrentUser, setLogin, setAvatar}) {
     const [success, setSuccess] = useState(false);
     const [failure, setFailure] = useState(false);
     const nameRef = useRef();
@@ -18,10 +18,16 @@ export default function Login({storedData, setCurrentUser}) {
 
         try {
             const response = await axios.post("/users/login", loginUser);
+            console.log(response);
             storedData.setItem("user", response.data.username);
             storedData.setItem("u_id", response.data._id);
+            storedData.setItem("avatar", response.data.avatar);
+            setAvatar(response.data.avatar);
             setCurrentUser(response.data.username);
             setSuccess(true);
+            setTimeout(() => {
+                setLogin(false);
+              }, "1000")
         } catch (error) {
             console.log(error);
             setFailure(true);
@@ -30,6 +36,7 @@ export default function Login({storedData, setCurrentUser}) {
 
   return (
     <div className="login-div">
+        <h1 className='cancel' onClick={()=>setLogin(false)}>X</h1>
         <h1 className="avatar-heading">Login</h1>
         <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
             <div className="login-inputs">

@@ -15,3 +15,24 @@
     z-index: 10;
     position: relative;
 }
+
+.mapboxgl-popup-close-button:focus-visible{
+    outline: none;
+}
+
+.mapboxgl-ctrl-top-right{
+    
+    right: auto;
+    margin-left: 20px;
+}
+
+.user-controls{
+    position: absolute;
+    z-index: 10;
+    right: 0;
+}
+
+.user-login-register{
+    right: 0;
+    position: absolute;
+}
