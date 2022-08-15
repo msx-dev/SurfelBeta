@@ -12,17 +12,9 @@ import Login from "../components/Login";
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import GeocoderControl from "../components/GeocoderControl";
 
-import Avatar1 from "../public/avatars/1.svg";
-import Avatar2 from "../public/avatars/2.svg";
-import Avatar3 from "../public/avatars/3.svg";
-import Avatar4 from "../public/avatars/4.svg";
-import Avatar5 from "../public/avatars/5.svg";
-import Avatar6 from "../public/avatars/6.svg";
-import Avatar7 from "../public/avatars/7.svg";
-import Avatar8 from "../public/avatars/8.svg";
-import Avatar9 from "../public/avatars/9.svg";
-import Avatar10 from "../public/avatars/10.svg";
+
 import NewSpot from "../components/NewSpot";
+import UserNavbar from "../components/UserNavbar";
 
 
 
@@ -49,22 +41,34 @@ function Surfel() {
     const [avatar, setAvatar] = useState(storedData.getItem("avatar"));
     const [register, setRegister] = useState(false);
     const [login, setLogin] = useState(false);
+    const [mapView, setMapView] = useState(storedData.getItem("mapView"));
+    const [mapStyle, setMapStyle] = useState("mapbox://styles/mapbox/satellite-v8");
     
 
     //API calls
     useEffect(()=> {
       const getPins = async () => {
         try {
-          console.log("here ok")
           const response = await axios.get("/pins");
           setPins(response.data);
-          console.log(response.data);
         } catch (error) {
           console.log(error);
         }
       }
 
       getPins();
+    }, [])
+
+    useEffect(()=> {
+      if(mapView === null){
+        setMapStyle("mapbox://styles/mapbox/satellite-v8")
+      }else if(mapView === "satellite"){
+        setMapStyle("mapbox://styles/mapbox/satellite-v8");
+      }else if(mapView==="cartoon"){
+        setMapStyle("mapbox://styles/msude/cl0b56qxj000215qj1qgx7faq");
+      }else{
+        console.log("Hmm")
+      }
     }, [])
 
 
@@ -127,6 +131,7 @@ function Surfel() {
     const handleLogout = () => {
       storedData.removeItem("user");
       storedData.removeItem("u_id");
+      storedData.removeItem("avatar");
       setCurrentUser(null);
     }
 
@@ -147,8 +152,9 @@ function Surfel() {
         maxPitch={70}
         transitionDuration = "500"
         maxZoom={40}
-        mapStyle="mapbox://styles/mapbox/satellite-v8"
+        mapStyle={mapStyle}
         terrain={{source: 'mapbox-dem', exaggeration: 1}}
+        
         //mapStyle="mapbox://styles/msude/cl0b56qxj000215qj1qgx7faq"
         //mapStyle="mapbox://styles/msude/ckwampov11d2q15odhnlp98v6"
         onDblClick={(e)=>addMarker(e)}
@@ -215,18 +221,9 @@ function Surfel() {
         <NewSpot storedData={storedData} setPins={setPins} pins={pins} newPin={newPin} setNewPin={setNewPin}/>
       )}
 
-      
-
       {/* User Navigation */}
       {currentUser ? (
-        <div className="user-controls">
-          {avatar===2 ? (
-            <img className="avatar-dropdown" src={Avatar2}/>
-          ) : (
-            <img src={Avatar1}/>
-          )}
-          <button className="button" onClick={handleLogout}>Log Out</button>
-        </div>
+        <UserNavbar avatar={avatar} handleLogout={handleLogout} storedData={storedData} setMapStyle={setMapStyle}/>
         ) 
       : (
         <div className="user-login-register">

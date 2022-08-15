@@ -20,9 +20,9 @@ const UserSchema = new mongoose.Schema(
             min: 8,
         },
         
-        rated: {
-            type: Array
-        }, 
+        rated: [{
+            type: String,
+        }], 
         avatar: {
             type: Number
         }

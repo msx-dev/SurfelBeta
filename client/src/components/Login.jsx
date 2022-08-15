@@ -37,15 +37,19 @@ export default function Login({storedData, setCurrentUser, setLogin, setAvatar})
   return (
     <div className="login-div">
         <h1 className='cancel' onClick={()=>setLogin(false)}>X</h1>
-        <h1 className="avatar-heading">Login</h1>
+        <h1 className="form-heading">Login</h1>
         <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
             <div className="login-inputs">
                 <input className="input-form" type="text" placeholder="Username" ref={nameRef}/>
                 <input className="input-form" type="password" placeholder="Password" ref={passwordRef}/>
             </div>
-            <button className="form-button" type="submit">Login</button>
-            {success && <span>Success!!</span>}
-            {failure && <span>Oops, something went wrong!</span>}
+            <div className="form-button-container-login">
+                <button className="form-button" type="submit">Login</button>
+            </div>
+            <div className="form-response-div-login">
+                {success && <span>Success!!</span>}
+                {failure && <span>Oops, something went wrong!</span>}
+            </div>
         </form>
     </div>
   )

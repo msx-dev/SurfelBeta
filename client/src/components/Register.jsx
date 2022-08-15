@@ -13,7 +13,7 @@ import Avatar8 from "../public/avatars/8.svg";
 import Avatar9 from "../public/avatars/9.svg";
 import Avatar10 from "../public/avatars/10.svg";
 
-export default function Register({setRegister, storedData, setCurrentUser}) {
+export default function Register({setRegister, storedData, setCurrentUser, setAvatar}) {
     const [success, setSuccess] = useState(false);
     const [failure, setFailure] = useState(false);
     const [avatarSelection, setAvatarSelection] = useState(false);
@@ -74,6 +74,8 @@ export default function Register({setRegister, storedData, setCurrentUser}) {
                     console.log(response);
                     storedData.setItem("user", response.data.username);
                     storedData.setItem("u_id", response.data._id);
+                    storedData.setItem("avatar", avatar);
+                    setAvatar(avatar);
                     setCurrentUser(response.data.username);
                     setSuccess(true);
                 } catch (error) {
@@ -102,9 +104,13 @@ export default function Register({setRegister, storedData, setCurrentUser}) {
                         <input className="input-form" type="email" placeholder="Email" ref={emailRef}/>
                         <input className="input-form" type="password" placeholder="Password" ref={passwordRef}/>
                     </div>
-                    <button className="form-button" type="submit">Register</button>
-                    {success && <span>Successfully registered!</span>}
-                    {failure && <span>Oops, something went wrong!</span>}
+                    <div className="form-button-container">
+                        <button className="form-button" type="submit">Register</button>
+                    </div>
+                    <div className="form-response-div">
+                        {success && <span>Successfully registered!</span>}
+                        {failure && <span>Oops, something went wrong!</span>}
+                    </div>
                 </form>
             </div>
         ) : (

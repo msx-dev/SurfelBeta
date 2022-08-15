@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const Pin = require("../models/Pin");
+const User = require("../models/User");
 const mongoose = require("mongoose");
+
 
 //Create a new Pin
 router.post("/", async (req, res)=> {
@@ -47,6 +49,7 @@ router.post("/update", async (req, res) => {
 router.post("/rate", async (req, res)=> {
     const id = req.body.id;
     const rating = req.body.rating;
+    const user_id = req.body.user_id;
     try {
         const pin = await Pin.findById(id);
         //Get number of all ratings of this pin and add one new rating
@@ -60,6 +63,12 @@ router.post("/rate", async (req, res)=> {
                 all_ratings_sum: sum,
                 all_ratings: all_ratings
             });
+        await User.findByIdAndUpdate(user_id,{
+            $addToSet: {
+                rated: [id]
+            }
+        })
+        
         res.status(200).json("Success!");
     } catch (error) {
         res.json(error);

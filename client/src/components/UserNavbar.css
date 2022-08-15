@@ -1,0 +1,40 @@
+.avatar-image{
+    width: 65px;
+}
+
+.avatar-image:hover{
+    width: 70px;
+    cursor: pointer;
+}
+
+.user-controls{
+    height: 100%;
+}
+
+.avatar-image-wrapper{
+    margin-top: 5px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dropdown{
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
+    color: white;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+  
+}
+
+.dropdown-option{
+    padding: 10px;
+    font-size: 25px;
+    height: 100%;
+}
+
+.dropdown-option:hover{
+    background-color: rgba(1, 1, 1, 0.326);
+}
