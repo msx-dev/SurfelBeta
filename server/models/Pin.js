@@ -30,8 +30,7 @@ const PinSchema = new mongoose.Schema(
         username: {
           type: String,
           required: true,
-        }
-        /* 
+        },
         all_ratings: {
           type: Number,
           required: true,
@@ -43,7 +42,7 @@ const PinSchema = new mongoose.Schema(
         forecastID: {
           type: Number
         }
-        */
+        
       },
     {timestamps: true}
 );

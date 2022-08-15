@@ -21,10 +21,10 @@ router.post("/register", async (req, res) => {
 
 
         const userSave = await newUser.save();
-        res.json(userSave);
+        res.status(200).json("Success!");
         
     } catch (error) {
-        res.json(error.message);
+        res.status(400).json("Something went wrong!");
     }
 })
 
@@ -70,6 +70,19 @@ router.get("/date", async (req, res)=> {
         res.status(200).json(users);
     } catch (error) {
         res.json(error.message);
+    }
+})
+
+router.post("/avatar", async (req, res)=> {
+    try {
+        const username = req.body.username;
+        const user = await User.findOne({username: username});
+        const avatar = req.body.avatar;
+
+        await User.findOneAndUpdate({username:username}, {avatar: avatar});
+        res.status(200).json("Avatar added!");
+    } catch (error) {
+        
     }
 })
 

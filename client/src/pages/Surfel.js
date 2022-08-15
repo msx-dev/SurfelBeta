@@ -39,6 +39,7 @@ function Surfel() {
     useEffect(()=> {
       const getPins = async () => {
         try {
+          console.log("here ok")
           const response = await axios.get("/pins");
           setPins(response.data);
           console.log(response.data);
@@ -70,6 +71,7 @@ function Surfel() {
     }
     
     const addMarker = (e) => {
+      console.log(e);
       const newLong = e.lngLat.lng;
       const newLat = e.lngLat.lat;
       setNewPin({
@@ -87,7 +89,9 @@ function Surfel() {
         rating: rating,
         lat: newPin.lat,
         long: newPin.long,
-        title: title
+        title: title,
+        all_ratings: 1,
+        all_ratings_sum: rating
       }
 
       try {
@@ -191,15 +195,15 @@ function Surfel() {
         {currentUser ? (<button className="button" onClick={handleLogout}>Log Out</button>) 
         : (
           <div>
-            <button className="button" onClick={()=>setLogin(true)}>Login</button>
-            <button className="button" onClick={()=>setRegister(true)}>Register</button>
+            <button className="button" onClick={()=>{setLogin(true); setRegister(false);}}>Login</button>
+            <button className="button" onClick={()=>{setRegister(true); setLogin(false);}}>Register</button>
           </div>
         )}
         {register && (
-          <Register/>
+          <Register setRegister={setRegister} storedData={storedData} setCurrentUser={setCurrentUser}/>
         )}
         {login && (
-          <Login storedData={storedData} setCurrentUser={setCurrentUser}/>
+          <Login storedData={storedData} setCurrentUser={setCurrentUser} setLogin={setLogin}/>
         )}
         
       </Map>

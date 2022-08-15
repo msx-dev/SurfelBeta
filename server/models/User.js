@@ -19,10 +19,13 @@ const UserSchema = new mongoose.Schema(
             require: true,
             min: 8,
         },
-        /*
+        
         rated: {
             type: Array
-        } */
+        }, 
+        avatar: {
+            type: Number
+        }
     },
     {timestamps: true}
 );

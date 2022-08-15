@@ -1,4 +1,67 @@
-.login-form{
-    position: relative;
+.login-div{
     z-index: 100;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
+    width: 350px;
+    height: 350px;
+    border-radius: 12px;
+}
+
+.input-form{
+    background-color: rgba(45, 45, 45, 0.382);
+    border: none;
+    width: 65%;
+    height: 40px;
+    font-size: 25px;
+    align-self: center;
+    border-radius: 4px;
+    color: white;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+}
+
+.login-inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100px;
+}
+
+.avatar-heading{
+    font-size: 50px;
+    color: white;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.input-form::placeholder{
+    color: rgba(255, 255, 255, 0.585);
+}
+
+.input-form:focus-visible{
+    outline: none;
+}
+
+.form-button{
+    height: 50px;
+    width: 150px;
+    color: black;
+    background-color: white;
+    border-radius: 4px;
+    align-self: center;
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
 }

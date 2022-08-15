@@ -29,12 +29,14 @@ export default function Login({storedData, setCurrentUser}) {
     }
 
   return (
-    <div className="login-form">
-        <h1>Login</h1>
-        <form onSubmit={(e) => handleSubmit(e)}>
-            <input type="text" placeholder="Username" ref={nameRef}/>
-            <input type="password" placeholder="Password" ref={passwordRef}/>
-            <button type="submit">Login</button>
+    <div className="login-div">
+        <h1 className="avatar-heading">Login</h1>
+        <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+            <div className="login-inputs">
+                <input className="input-form" type="text" placeholder="Username" ref={nameRef}/>
+                <input className="input-form" type="password" placeholder="Password" ref={passwordRef}/>
+            </div>
+            <button className="form-button" type="submit">Login</button>
             {success && <span>Success!!</span>}
             {failure && <span>Oops, something went wrong!</span>}
         </form>

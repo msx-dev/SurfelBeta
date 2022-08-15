@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 router.post("/", async (req, res)=> {
     const pin = new Pin(req.body);
     try {
+        console.log(pin);
         const savedPin = await pin.save();
         res.status(200).json(savedPin);
     } catch (error) {
@@ -27,6 +28,7 @@ router.get("/", async (req, res) => {
 //Get new rating from req.body => add +1 to ratings and sum_ratings+=1, then divide and update
 router.post("/update", async (req, res) => {
     const id = req.body.id;
+    
     try {
         /*Pin.updateOne({_id: id}, {
             $set: {
@@ -42,5 +44,30 @@ router.post("/update", async (req, res) => {
         res.json(error.message);
     }
 })
+
+router.post("/rate", async (req, res)=> {
+    const id = req.body.id;
+    const rating = req.body.rating;
+    try {
+        const pin = await Pin.findById(id);
+        //Get number of all ratings of this pin and add one new rating
+        all_ratings = pin.all_ratings + 1;
+        //Get sum of actual ratings and add new rating to the sum
+        sum = pin.all_ratings_sum + rating;
+        const ratings = sum/all_ratings;
+        await Pin.findByIdAndUpdate(id,
+            {
+                rating: ratings,
+                all_ratings_sum: sum,
+                all_ratings: all_ratings
+            });
+        res.status(200).json("Success!");
+    } catch (error) {
+        res.json(error);
+    }
+    
+})
+
+
 
 module.exports = router;
