@@ -11,10 +11,12 @@ import Register from "../components/Register";
 import Login from "../components/Login";
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import GeocoderControl from "../components/GeocoderControl";
+import Avatar10 from "../public/avatars/10.svg";
 
 
 import NewSpot from "../components/NewSpot";
 import UserNavbar from "../components/UserNavbar";
+import NewSurfSpot from "../components/NewSurfSpot";
 
 
 
@@ -33,16 +35,14 @@ function Surfel() {
     const [pins, setPins] = useState([]);
     const [clickedId, setClickedId] = useState(null);
     const [newPin, setNewPin] = useState(null);
-    const [title, setTitle] = useState("");
-    const [review, setReview] = useState("");
-    const [rating, setRating] = useState(1);
     const [newSpot, setNewSpot] = useState(false);
     const [currentUser, setCurrentUser] = useState(storedData.getItem("user"));
-    const [avatar, setAvatar] = useState(storedData.getItem("avatar"));
+    const [avatar, setAvatar] = useState(parseInt(storedData.getItem("avatar")));
     const [register, setRegister] = useState(false);
     const [login, setLogin] = useState(false);
     const [mapView, setMapView] = useState(storedData.getItem("mapView"));
-    const [mapStyle, setMapStyle] = useState("mapbox://styles/mapbox/satellite-v8");
+    const [mapStyle, setMapStyle] = useState();
+
     
 
     //API calls
@@ -59,8 +59,10 @@ function Surfel() {
       getPins();
     }, [])
 
+
     useEffect(()=> {
       if(mapView === null){
+        console.log("Mapstyle is null!")
         setMapStyle("mapbox://styles/mapbox/satellite-v8")
       }else if(mapView === "satellite"){
         setMapStyle("mapbox://styles/mapbox/satellite-v8");
@@ -69,7 +71,7 @@ function Surfel() {
       }else{
         console.log("Hmm")
       }
-    }, [])
+    }, [mapView])
 
 
     //Map Layers
@@ -104,30 +106,7 @@ function Surfel() {
       
     }
 
-    const handleSubmit = async (e) => {
-      console.log(newPin.lat)
-      e.preventDefault();
-      const savePin = {
-        username: currentUser,
-        description: review,
-        rating: rating,
-        lat: newPin.lat,
-        long: newPin.long,
-        title: title,
-        all_ratings: 1,
-        all_ratings_sum: rating
-      }
-
-      try {
-        const response = await axios.post("/pins", savePin);
-        console.log(response.data)
-        setPins([...pins, response.data]);
-        setNewPin(null);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
+    
     const handleLogout = () => {
       storedData.removeItem("user");
       storedData.removeItem("u_id");
@@ -212,18 +191,18 @@ function Surfel() {
       {/* Adding New Pin */}
       {(newPin && currentUser && (!newSpot)) && (
         <Popup latitude={newPin.lat} longitude={newPin.long} anchor="left" closeOnClick={false} onClose={()=>setNewPin(null)}>
-            <buton onClick={() => setNewSpot(true)}>Add Pin Here?</buton>
+            <buton onClick={() => {setNewSpot(true)}}>Add Pin Here?</buton>
             <buton onClick={() => setNewPin(null)}>Cancel</buton>
             {/* */}
           </Popup>
       )}
       {newPin && currentUser && newSpot && (
-        <NewSpot storedData={storedData} setPins={setPins} pins={pins} newPin={newPin} setNewPin={setNewPin}/>
+        <NewSurfSpot storedData={storedData} setPins={setPins} pins={pins} newPin={newPin} setNewPin={setNewPin} setNewSpot={setNewSpot}/>
       )}
 
       {/* User Navigation */}
       {currentUser ? (
-        <UserNavbar avatar={avatar} handleLogout={handleLogout} storedData={storedData} setMapStyle={setMapStyle}/>
+        <UserNavbar avatar={avatar} setMapView={setMapView} handleLogout={handleLogout} storedData={storedData} setMapStyle={setMapStyle}/>
         ) 
       : (
         <div className="user-login-register">

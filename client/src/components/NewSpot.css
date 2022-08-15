@@ -24,3 +24,8 @@
 .cancel:hover{
     cursor: pointer;
 }
+
+.newsport-input-compartment{
+    height: 80%;
+    width: 100%;
+}

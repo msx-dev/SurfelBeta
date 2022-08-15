@@ -25,9 +25,7 @@ export default function Login({storedData, setCurrentUser, setLogin, setAvatar})
             setAvatar(response.data.avatar);
             setCurrentUser(response.data.username);
             setSuccess(true);
-            setTimeout(() => {
-                setLogin(false);
-              }, "1000")
+            setLogin(false);
         } catch (error) {
             console.log(error);
             setFailure(true);
