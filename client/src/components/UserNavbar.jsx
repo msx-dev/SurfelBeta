@@ -59,7 +59,7 @@ export default function UserNavbar({avatar, handleLogout, storedData, setMapStyl
         </div>
         {showDropdown && (
             <div className='dropdown'>
-                <h2 className='dropdown-option' onClick={()=> {mapView(); setShowDropdown(false);}}>Satellite View</h2>
+                <h2 className='dropdown-option' onClick={()=> {mapView(); setShowDropdown(false);}}>Toggle View</h2>
                 <h2 className='dropdown-option'>Nearby Spots</h2>
                 <h2 className='dropdown-option' onClick={handleLogout}>Log Out</h2>
             </div>

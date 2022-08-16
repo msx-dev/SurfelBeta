@@ -17,6 +17,8 @@ import Avatar10 from "../public/avatars/10.svg";
 import NewSpot from "../components/NewSpot";
 import UserNavbar from "../components/UserNavbar";
 import NewSurfSpot from "../components/NewSurfSpot";
+import SpotDetailed from "../components/SpotDetailed";
+import PopupContent from "../components/PopupContent";
 
 
 
@@ -55,7 +57,7 @@ function Surfel() {
           console.log(error);
         }
       }
-
+      console.log(process.env.REACT_APP_WEATHERAPI)
       getPins();
     }, [])
 
@@ -63,7 +65,7 @@ function Surfel() {
     useEffect(()=> {
       if(mapView === null){
         console.log("Mapstyle is null!")
-        setMapStyle("mapbox://styles/mapbox/satellite-v8")
+        setMapStyle("mapbox://styles/mapbox/satellite-v8");
       }else if(mapView === "satellite"){
         setMapStyle("mapbox://styles/mapbox/satellite-v8");
       }else if(mapView==="cartoon"){
@@ -111,6 +113,7 @@ function Surfel() {
       storedData.removeItem("user");
       storedData.removeItem("u_id");
       storedData.removeItem("avatar");
+      storedData.removeItem("mapView");
       setCurrentUser(null);
     }
 
@@ -168,23 +171,15 @@ function Surfel() {
               </Marker>
               {pin._id === clickedId && (
                 <Popup key={pin._id} latitude={pin.lat} longitude={pin.long} anchor="left" closeOnClick={false} onClose={()=>setClickedId(null)}>
-                <div className="popup">
-                  <label>Title</label>
-                  <h2>{pin.title}</h2>
-                  <label>Review</label>
-                  <h2>{pin.description}</h2>
-                  <label>Rating</label>
-                  {Array(pin.rating).fill(<GiWaveSurfer/>)}
-                  <label>Info</label>
-                  <span>Created by <br/>{pin.username}</span>
-                  <span>{format(pin.createdAt)}</span>
-                </div>
-              </Popup>
+                <PopupContent title={pin.title} rating={pin.rating} key={pin._id}/>
+                </Popup>
               )}
             </>
           ))}
         </>
         ) : <></>}
+
+        <SpotDetailed/>
         
       
 
@@ -199,6 +194,7 @@ function Surfel() {
       {newPin && currentUser && newSpot && (
         <NewSurfSpot storedData={storedData} setPins={setPins} pins={pins} newPin={newPin} setNewPin={setNewPin} setNewSpot={setNewSpot}/>
       )}
+
 
       {/* User Navigation */}
       {currentUser ? (

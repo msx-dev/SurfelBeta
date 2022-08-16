@@ -34,6 +34,7 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
           console.log(response.data)
           setPins([...pins, response.data]);
           setNewPin(null);
+          setNewSpot(false);
         } catch (error) {
           console.log(error);
         }
@@ -43,21 +44,21 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
     <div className="popup-add">
         <h1 className='cancel' onClick={()=> {setNewSpot(false); setNewPin(null)}}>X</h1>
         {stage === 1 ? (
-            <div className='newspot-input-compartment'>
+            <div className='newspot-input-compartment1'>
                 <h1>Give this spot a title</h1>
                 <input placeholder='title' className='input-form' value={title} onChange={(e)=>setTitle(e.target.value)}/>
                 <h2 className='hint'>It's best to use the name of the beach or perhaps a local name for this spot.</h2>
                 <button onClick={()=>setStage(2)} className='next-button'>Next</button>
             </div>
         ): stage === 2 ? (
-            <div className='newspot-input-compartment'>
+            <div className='newspot-input-compartment2'>
                 <h1>Give this spot a review</h1>
                 <textarea placeholder='title' className='textarea-form' value = {review} onChange={(e)=>setReview(e.target.value)}/>
                 <h2 className='hint'>Tell us a few words about this spot.</h2>
                 <button onClick={()=>setStage(3)} className='next-button'>Next</button>
             </div>
         ) : stage === 3 ? (
-            <div className='newspot-input-compartment'>
+            <div className='newspot-input-compartment3'>
                 <h1>Give this spot a rating</h1>
                 {rating === 0 && (<div className='rating-select'>
                     <GiWaveSurfer className='rating-logo' size={50} onClick={() => {setRating(1); setRemaining(4);}}/>
@@ -81,7 +82,7 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
                 <button onClick={()=>setStage(4)} className='next-button'>Next</button>
             </div>
         ) : stage === 4 ? (
-            <div className='newspot-input-compartment'>
+            <div className='newspot-input-compartment4'>
                 <h1>Spot forecast ID</h1>
                 <input placeholder='title' type="number" className='input-form' value={forecastID} onChange={(e)=>setForecastID(e.target.value)}/>
                 <h2 className='hint'>You can skip this step, but it will help your fellow surfers. You can read the instructions <a href="">here.</a></h2>
