@@ -79,16 +79,10 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
                     </div>
                 )}
                 <h2 className='hint'>It's best to use the name of the beach or perhaps a local name for this spot.</h2>
-                <button onClick={()=>setStage(4)} className='next-button'>Next</button>
-            </div>
-        ) : stage === 4 ? (
-            <div className='newspot-input-compartment4'>
-                <h1>Spot forecast ID</h1>
-                <input placeholder='title' type="number" className='input-form' value={forecastID} onChange={(e)=>setForecastID(e.target.value)}/>
-                <h2 className='hint'>You can skip this step, but it will help your fellow surfers. You can read the instructions <a href="">here.</a></h2>
                 <button onClick={()=>handleSubmit()} className='next-button'>Finish</button>
-            </div> 
-        ) : (<div></div>) }
+            </div>
+        ) :  
+         (<div></div>) }
         
     </div>
   )

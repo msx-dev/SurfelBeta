@@ -44,6 +44,7 @@ function Surfel() {
     const [login, setLogin] = useState(false);
     const [mapView, setMapView] = useState(storedData.getItem("mapView"));
     const [mapStyle, setMapStyle] = useState();
+    const [openDetails, setOpenDetails] = useState(false);
 
     
 
@@ -171,15 +172,16 @@ function Surfel() {
               </Marker>
               {pin._id === clickedId && (
                 <Popup key={pin._id} latitude={pin.lat} longitude={pin.long} anchor="left" closeOnClick={false} onClose={()=>setClickedId(null)}>
-                <PopupContent title={pin.title} rating={pin.rating} key={pin._id}/>
+                  <PopupContent title={pin.title} rating={pin.rating} key={pin._id} setOpenDetails={setOpenDetails} setClickedId={setClickedId}/>
                 </Popup>
               )}
+              {openDetails && (<SpotDetailed latitude={pin.lat} longitude={pin.long} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)
+                
+              }
             </>
           ))}
         </>
         ) : <></>}
-
-        <SpotDetailed/>
         
       
 
