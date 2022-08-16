@@ -58,7 +58,6 @@ function Surfel() {
           console.log(error);
         }
       }
-      console.log(process.env.REACT_APP_WEATHERAPI)
       getPins();
     }, [])
 
@@ -70,7 +69,7 @@ function Surfel() {
       }else if(mapView === "satellite"){
         setMapStyle("mapbox://styles/mapbox/satellite-v8");
       }else if(mapView==="cartoon"){
-        setMapStyle("mapbox://styles/msude/cl0b56qxj000215qj1qgx7faq");
+        setMapStyle(process.env.REACT_APP_COLORVIEW);
       }else{
         console.log("Hmm")
       }

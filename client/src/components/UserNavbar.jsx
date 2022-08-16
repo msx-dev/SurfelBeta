@@ -14,10 +14,6 @@ import "./UserNavbar.css";
 export default function UserNavbar({avatar, handleLogout, storedData, setMapStyle, setMapView}) {
     const [showDropdown, setShowDropdown] = useState(false);
     const [profile, setProfile] = useState(avatar);
-    
-    useEffect(()=> {
-        console.log(typeof(profile))
-    }, []);
 
     const mapView = () => {
         const currentView = storedData.getItem("mapView");
