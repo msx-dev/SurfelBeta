@@ -18,7 +18,6 @@ export default function Login({storedData, setCurrentUser, setLogin, setAvatar})
 
         try {
             const response = await axios.post("/users/login", loginUser);
-            console.log(response);
             storedData.setItem("user", response.data.username);
             storedData.setItem("u_id", response.data._id);
             storedData.setItem("avatar", response.data.avatar);

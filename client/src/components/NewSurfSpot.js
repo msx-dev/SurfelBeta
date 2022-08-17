@@ -15,7 +15,6 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
 
 
     const handleSubmit = async (e) => {
-        console.log(newPin.lat)
         
         const savePin = {
           username: currentUser,
@@ -31,7 +30,6 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
   
         try {
           const response = await axios.post("/pins", savePin);
-          console.log(response.data)
           setPins([...pins, response.data]);
           setNewPin(null);
           setNewSpot(false);

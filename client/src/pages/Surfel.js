@@ -45,6 +45,7 @@ function Surfel() {
     const [mapView, setMapView] = useState(storedData.getItem("mapView"));
     const [mapStyle, setMapStyle] = useState();
     const [openDetails, setOpenDetails] = useState(false);
+    const [openSmall, setOpenSmall] = useState(false);
 
     
 
@@ -64,7 +65,6 @@ function Surfel() {
 
     useEffect(()=> {
       if(mapView === null){
-        console.log("Mapstyle is null!")
         setMapStyle("mapbox://styles/mapbox/satellite-v8");
       }else if(mapView === "satellite"){
         setMapStyle("mapbox://styles/mapbox/satellite-v8");
@@ -92,6 +92,8 @@ function Surfel() {
       //setViewState({...viewState, latitude: lat, longitude: long});
       mapRef.current?.flyTo({center: [long, lat], duration: 2000});
       setClickedId(id);
+      setOpenSmall(true);
+      setOpenDetails(false);
     }
     
     const addMarker = (e) => {
@@ -167,14 +169,14 @@ function Surfel() {
               <Marker key={pin._id} latitude={pin.lat} longitude={pin.long} onClick={e => {
                   pinClicked(pin._id, pin.lat, pin.long);
                 }}>
-                <IoLocationSharp key={pin._id} color= {currentUser === pin.username ? "tomato" : "white"} size={"25"} cursor={"pointer"}/>
+                <IoLocationSharp key={pin._id} color= {currentUser === pin.username ? "white" : "#d27e7c"} size={"25"} cursor={"pointer"}/>
               </Marker>
-              {pin._id === clickedId && (
+              {(pin._id === clickedId) && openSmall===true && (
                 <Popup key={pin._id} latitude={pin.lat} longitude={pin.long} anchor="left" closeOnClick={false} onClose={()=>setClickedId(null)}>
-                  <PopupContent title={pin.title} rating={pin.rating} key={pin._id} setOpenDetails={setOpenDetails} setClickedId={setClickedId}/>
+                  <PopupContent title={pin.title} rating={pin.rating} key={pin._id} setOpenDetails={setOpenDetails} setOpenSmall={setOpenSmall}/>
                 </Popup>
               )}
-              {openDetails && (<SpotDetailed latitude={pin.lat} longitude={pin.long} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)
+              {openDetails && (pin._id === clickedId) && (<SpotDetailed latitude={pin.lat} longitude={pin.long} setOpenSmall={setOpenSmall} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)
                 
               }
             </>
@@ -203,8 +205,8 @@ function Surfel() {
         ) 
       : (
         <div className="user-login-register">
-          <button className="button" onClick={()=>{setLogin(true); setRegister(false);}}>Login</button>
-          <button className="button" onClick={()=>{setRegister(true); setLogin(false);}}>Register</button>
+          <button className="button-login" onClick={()=>{setLogin(true); setRegister(false);}}>Login</button>
+          <button className="button-register" onClick={()=>{setRegister(true); setLogin(false);}}>Register</button>
         </div>
       )}
       {register && (

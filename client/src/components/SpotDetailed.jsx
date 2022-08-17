@@ -22,7 +22,7 @@ import { getWindDirection } from '../functions/getWindDirection';
 
 
 
-export default function SpotDetailed({latitude, longitude, setOpenDetails, title, review, author, rating}) {
+export default function SpotDetailed({latitude, longitude, setOpenDetails, title, review, author, rating, setOpenSmall}) {
 
     const [swell, setSwell] = useState(0);
     const [period, setPeriod] = useState(0);
@@ -39,6 +39,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
     const [weatherIconTom, setWeatherIconTom] = useState();
     const [windSpeedKmAft, setWindSpeedKmAft] = useState(0);
     const [weatherIconAft, setWeatherIconAft] = useState();
+    const [openRating, setOpenRating] = useState(false);
 
     //Get Forecast for current day
     useEffect(()=> {
@@ -320,7 +321,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
    
   return (
     <div className='detailed-spot'>
-        <h1 className='cancel' onClick={()=>setOpenDetails(false)}>X</h1>
+        <h1 className='cancel' onClick={()=>{setOpenDetails(false); setOpenSmall(false);}}>X</h1>
         <div className='spot-names'>
             <p className='spot-name-description'>Spot Title</p>
             <h1 className='spot-title'>{title}</h1>
@@ -330,11 +331,21 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
                 <p className='written-by'>Written by</p>
                 <p className='review-author'>{author}</p>
             </div>
-            <p className='spot-name-rating'>Spot Rating</p>
-            <h1 className='spot-title'>{rating}</h1>
-            <p className='all-ratings'>1234 ratings</p>
         </div>
         <div className='spot-forecast'>
+            {openRating===false && (
+                <div className='rating-wrapper' onClick={()=>setOpenRating(true)}>
+                    <p className='rating-name'>Rating</p>
+                    <h1 className='spot-rating'>{rating}</h1>
+                </div>
+            )}
+            
+            {openRating===true && (
+                <div className='rating-wrapper-rate'>
+                    <p className='rate-question' onClick={()=>console.log("Open rate dialog")}>Rate Spot</p>
+                    <h1 className='cancel-rate' onClick={()=>setOpenRating(false)}>Cancel</h1>
+                </div>
+            )}
             <div className='surf-conditions'>
                 <div className='waves'>
                     <div className='upper-waves'>
