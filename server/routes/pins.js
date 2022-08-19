@@ -76,6 +76,23 @@ router.post("/rate", async (req, res)=> {
     
 })
 
+router.get("/date", async (req, res)=> {
+    try {
+        const event = new Date(2022, 12, 12);
+        console.log(event.toISOString());
+        const users = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date(2022, 4, 13),
+                $lt: new Date(2022, 12, 12), 
+            }
+        }) 
+
+        res.status(200).json(users);
+    } catch (error) {
+        res.json(error.message);
+    }
+})
+
 
 
 module.exports = router;

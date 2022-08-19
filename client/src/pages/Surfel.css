@@ -106,3 +106,7 @@
 .mapboxgl-ctrl-geocoder--button{
     background-color: transparent !important;
 }
+
+.mapboxgl-popup-content{
+    z-index: 1;
+}

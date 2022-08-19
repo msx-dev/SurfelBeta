@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
         }else if(!validatePassword){
             res.status(400).json("Username or Password not correct!")
         }else{
-            res.status(200).json({_id:user._id, username: user.username, avatar: user.avatar});
+            res.status(200).json({_id:user._id, username: user.username, avatar: user.avatar, user_type: user.user_type});
         }
         
     } catch (error) {

@@ -46,6 +46,7 @@ function Surfel() {
     const [mapStyle, setMapStyle] = useState();
     const [openDetails, setOpenDetails] = useState(false);
     const [openSmall, setOpenSmall] = useState(false);
+    const [admin, setAdmin] = useState(storedData.getItem("admin_key"));
 
     
 
@@ -61,6 +62,8 @@ function Surfel() {
       }
       getPins();
     }, [])
+
+    
 
 
     useEffect(()=> {
@@ -116,13 +119,16 @@ function Surfel() {
       storedData.removeItem("u_id");
       storedData.removeItem("avatar");
       storedData.removeItem("mapView");
+      storedData.removeItem("admin_key");
+      storedData.removeItem("user_type");
       setCurrentUser(null);
+      setAdmin(null);
     }
 
       
   return (
     <div style={{ height: "100vh", width: "100%" }}>
-      <Map
+    {!admin && (<Map
         ref={mapRef}
         {...viewState}
         onMove={evt => setViewState(evt.viewState)}
@@ -210,13 +216,30 @@ function Surfel() {
         </div>
       )}
       {register && (
-        <Register setRegister={setRegister} storedData={storedData} setCurrentUser={setCurrentUser} setAvatar={setAvatar}/>
+        <Register 
+          setRegister={setRegister} 
+          storedData={storedData} 
+          setCurrentUser={setCurrentUser} 
+          setAvatar={setAvatar}
+        />
       )}
       {login && (
-        <Login storedData={storedData} setCurrentUser={setCurrentUser} setLogin={setLogin} setAvatar={setAvatar}/>
+        <Login 
+          storedData={storedData} 
+          setCurrentUser={setCurrentUser} 
+          setLogin={setLogin} 
+          setAvatar={setAvatar} 
+          setAdmin={setAdmin}
+        />
       )}
         
-      </Map>
+      </Map>)}
+      {admin===process.env.REACT_APP_ADMIN_KEY && (
+        <div>
+          <h1>Admin Panel</h1>
+          <button onClick={()=>handleLogout()}>Log Out</button>
+        </div>
+      )}
     </div>
   );
 }

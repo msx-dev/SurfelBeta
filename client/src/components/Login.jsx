@@ -3,7 +3,7 @@ import "./Login.css";
 import React, { useRef, useState } from 'react'
 import axios from "axios";
 
-export default function Login({storedData, setCurrentUser, setLogin, setAvatar}) {
+export default function Login({storedData, setCurrentUser, setLogin, setAvatar, setAdmin}) {
     const [success, setSuccess] = useState(false);
     const [failure, setFailure] = useState(false);
     const nameRef = useRef();
@@ -18,11 +18,20 @@ export default function Login({storedData, setCurrentUser, setLogin, setAvatar})
 
         try {
             const response = await axios.post("/users/login", loginUser);
-            storedData.setItem("user", response.data.username);
-            storedData.setItem("u_id", response.data._id);
-            storedData.setItem("avatar", response.data.avatar);
-            setAvatar(response.data.avatar);
-            setCurrentUser(response.data.username);
+            
+            if(response.data.user_type === "user"){
+                storedData.setItem("user", response.data.username);
+                storedData.setItem("u_id", response.data._id);
+                storedData.setItem("avatar", response.data.avatar);
+
+                setAvatar(response.data.avatar);
+                setCurrentUser(response.data.username);
+            }else if(response.data.user_type === "admin"){
+                console.log("Here ok")
+                storedData.setItem("admin_key", process.env.REACT_APP_ADMIN_KEY);
+                setAdmin(process.env.REACT_APP_ADMIN_KEY);
+                setCurrentUser(response.data.username);
+            }
             setSuccess(true);
             setLogin(false);
         } catch (error) {

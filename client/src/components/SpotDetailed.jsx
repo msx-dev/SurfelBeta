@@ -23,7 +23,6 @@ import { getWindDirection } from '../functions/getWindDirection';
 
 
 export default function SpotDetailed({latitude, longitude, setOpenDetails, title, review, author, rating, setOpenSmall}) {
-
     const [swell, setSwell] = useState(0);
     const [period, setPeriod] = useState(0);
     const [weatherIcon, setWeatherIcon] = useState();
@@ -40,6 +39,10 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
     const [windSpeedKmAft, setWindSpeedKmAft] = useState(0);
     const [weatherIconAft, setWeatherIconAft] = useState();
     const [openRating, setOpenRating] = useState(false);
+    const [today, setToday] = useState();
+    const [tomorrow, setTomorrow] = useState();
+    const [afterTomorrow, setAfterTomorrow] = useState();
+
 
     //Get Forecast for current day
     useEffect(()=> {
@@ -315,7 +318,35 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
         getConditions();
     }, []);
 
-    //Get Forecast for future days
+    //Get day names
+    useEffect(()=>{
+        const getDays = () => {
+            const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            const d = new Date();
+            let todayNum = d.getDay();
+            let tomorrowNum = todayNum + 1;
+            let afterTomorrowNum = todayNum + 2;
+            
+            //Check for overflow in dates
+            if(todayNum === 5){
+                afterTomorrowNum = 0;
+            }else if(todayNum === 6){
+                tomorrowNum = 0;
+                afterTomorrowNum = 1;
+            }
+
+            
+            console.log(todayNum, tomorrowNum)
+            console.log(typeof(weekday[todayNum]))
+            setToday(weekday[todayNum]);
+            setTomorrow(weekday[tomorrowNum]);
+            setAfterTomorrow(weekday[afterTomorrowNum]);
+        }
+
+        getDays();
+        
+
+    }, [])
 
 
    
@@ -395,7 +426,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
             </div>
             <div className='weather'>
                 <div className='today'>
-                    <p className='today-descriptor'>Today</p>
+                    <p className='today-descriptor'>{today}</p>
                     <div className='today-card'>
                         <img src={weatherIcon} className="today-weather-icon" alt="weather icon"/>
                         <div className='today-temperature'>
@@ -405,7 +436,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
                     </div>
                 </div>
                 <div className='upcoming'>
-                        <p className='upcoming-descriptor'>Fri</p>
+                        <p className='upcoming-descriptor'>{tomorrow}</p>
                         <div className='upcoming-card'>
                             <img src={weatherIconTom} className="upcoming-weather-icon" alt="weather icon"/>
                             <div className='upcoming-temperature'>
@@ -415,7 +446,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
                         </div>
                     </div>
                     <div className='upcoming'>
-                        <p className='upcoming-descriptor'>Sat</p>
+                        <p className='upcoming-descriptor'>{afterTomorrow}</p>
                         <div className='upcoming-card'>
                             <img src={weatherIconAft} className="upcoming-weather-icon" alt="weather icon"/>
                             <div className='upcoming-temperature'>
