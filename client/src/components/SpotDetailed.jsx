@@ -19,6 +19,7 @@ import { averageSwell } from '../functions/getAverageSwell';
 import { averagePeriod } from '../functions/getAveragePeriod';
 import { getWeatherString } from '../functions/getWeatherString';
 import { getWindDirection } from '../functions/getWindDirection';
+import { GiWaveSurfer } from 'react-icons/gi';
 
 
 
@@ -42,6 +43,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
     const [today, setToday] = useState();
     const [tomorrow, setTomorrow] = useState();
     const [afterTomorrow, setAfterTomorrow] = useState();
+    const [openRatingChoice, setOpenRatingChoice] = useState(false);
 
 
     //Get Forecast for current day
@@ -335,7 +337,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
                 afterTomorrowNum = 1;
             }
 
-            
+
             console.log(todayNum, tomorrowNum)
             console.log(typeof(weekday[todayNum]))
             setToday(weekday[todayNum]);
@@ -374,7 +376,16 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
             {openRating===true && (
                 <div className='rating-wrapper-rate'>
                     <p className='rate-question' onClick={()=>console.log("Open rate dialog")}>Rate Spot</p>
-                    <h1 className='cancel-rate' onClick={()=>setOpenRating(false)}>Cancel</h1>
+                    <h1 className='cancel-rate' onClick={()=>{setOpenRating(false); setOpenRatingChoice(true);}}>Cancel</h1>
+                </div>
+            )}
+            {openRatingChoice === true && (
+                <div className='rating-choice-wrapper'>
+                    <GiWaveSurfer className='rating-logo' size={50} />
+                    <GiWaveSurfer className='rating-logo' size={50} />
+                    <GiWaveSurfer className='rating-logo' size={50} />
+                    <GiWaveSurfer className='rating-logo' size={50} />
+                    <GiWaveSurfer className='rating-logo' size={50} />
                 </div>
             )}
             <div className='surf-conditions'>
