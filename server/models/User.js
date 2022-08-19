@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema(
         }], 
         avatar: {
             type: Number
+        },
+        user_type: {
+            type: String,
+            default: "user"
         }
     },
     {timestamps: true}

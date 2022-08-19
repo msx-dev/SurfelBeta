@@ -8,6 +8,10 @@ router.post("/register", async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
         const username = req.body.username;
+        const user_type = req.body.user_type;
+        
+        
+
 
         const saltRounds = await bcrypt.genSalt(12);
         const cryptPassword = await bcrypt.hash(password, saltRounds);
@@ -16,6 +20,7 @@ router.post("/register", async (req, res) => {
             username: username,
             email: email,
             password: cryptPassword,
+            user_type: user_type
         })
 
 
