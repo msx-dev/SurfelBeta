@@ -69,7 +69,8 @@ router.post("/rate", async (req, res)=> {
         all_ratings = pin.all_ratings + 1;
         //Get sum of actual ratings and add new rating to the sum
         sum = pin.all_ratings_sum + rating;
-        const ratings = sum/all_ratings;
+        let ratings = sum/all_ratings;
+        ratings = Math.round(ratings * 10) / 10;
         await Pin.findByIdAndUpdate(id,
             {
                 rating: ratings,

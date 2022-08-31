@@ -1,5 +1,5 @@
 .detailed-spot{
-    background-color: rgb(255, 255, 255);
+    background-color:rgba(255, 255, 255, 0.412);
     width: 500px;
     position: absolute;
     right: 0;
@@ -9,10 +9,15 @@
     flex-direction: column;
     justify-content: space-around;
     z-index: 2;
+    backdrop-filter: blur(10px);
 }
 
 .spot-forecast{
-    margin-bottom: 5%;
+    padding-bottom: 5%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    background-color:rgba(255, 255, 255, 0.205);
+    backdrop-filter: blur(10px);
 }
 
 .author-div{
@@ -52,17 +57,20 @@
 .spot-name-description{
     font-size: 12px;
     margin-bottom: 2px;
+    color: rgb(0, 0, 0);
 }
 
 .spot-title{
     font-size: 30px;
     margin-bottom: 10px;
+    color: rgb(0, 0, 0);
 }
 
 .spot-description{
     font-size: 24px;
     margin-bottom: 3px;
     line-height: 26px;
+    color: rgb(9, 9, 9);
 }
 
 .surf-conditions{
@@ -400,17 +408,6 @@
     cursor: pointer;
 }
 
-.spot-names{
-    background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(255, 255, 255));
-    justify-content: space-around;
-    margin: auto;
-    margin-top: 15px;
-    width: 95%;
-    border-radius: 12px;
-    height: 180px;
-    box-shadow: 0 6px 6px hsl(0deg 0% 0% / 0.3);
-}
-
 .rating-choice-wrapper{
     box-shadow: 0 6px 6px hsl(0deg 0% 0% / 0.3);
     background-image: linear-gradient(to bottom right, rgb(255, 244, 185), rgb(251, 233, 132));
@@ -433,4 +430,11 @@
 
 .rating-logo-spot:hover{
     cursor: pointer;
+}
+
+.quit-spot-detailed{
+    width: 20px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }

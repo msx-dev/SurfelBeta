@@ -74,6 +74,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
 
     useEffect(()=> {
         const getSpotIds = async () => {
+            console.log("Called!")
             try {
                 const user = {
                     user_id: userId
@@ -106,6 +107,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                     .then(result => {
                         //Wind speed in meters/second
                         weatherForecast = result;
+                        console.log(weatherForecast)
                     });
                 
                 
@@ -118,8 +120,6 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                 windSpeed = windSpeed * 3.6;
                 windSpeed= Math.round(windSpeed * 10) / 10;
                 setWindSpeedKm(windSpeed);
-
-                console.log(weatherForecast.main)
 
                 //Set min and max temperature for today, round to 1 decimal
                 const todayMax = Math.round(weatherForecast.main["temp_max"]);
@@ -221,7 +221,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                     .then(result => {
                         //Wind speed in meters/second
                         weatherForecast = result;
-                        
+                        console.log(weatherForecast)
                         
                     });
                 
@@ -354,7 +354,6 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
 
                 const forecastData = await response.json()
 
-    
                 //Get spot's Swell height in [m]
                 const swellHeight = forecastData["swell1_height-surface"];
                 let spotSwell = averageSwell(swellHeight);
@@ -418,7 +417,9 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
    
   return (
     <div className='detailed-spot'>
-        <h1 className='cancel-detailed' onClick={()=>{setOpenDetails(false); setOpenSmall(false); console.log("Clicked");}}>X</h1>
+        <div onClick={()=>{setOpenDetails(false); setOpenSmall(false); console.log("Clicked");}} className="quit-spot-detailed">
+            <h1 className='cancel-detailed'>X</h1>
+        </div>
         <div className='spot-names'>
             <p className='spot-name-description'>Spot Title</p>
             <h1 className='spot-title'>{title}</h1>
