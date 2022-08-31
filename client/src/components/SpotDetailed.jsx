@@ -21,6 +21,7 @@ import { getWeatherString } from '../functions/getWeatherString';
 import { getWindDirection } from '../functions/getWindDirection';
 import { GiWaveSurfer } from 'react-icons/gi';
 import axios from 'axios';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 
 
@@ -413,134 +414,142 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
         }
     }
 
+    const handleClickAway = () => {
+        console.log("Clicked away!")
+    }
+
 
    
   return (
-    <div className='detailed-spot'>
-        <div onClick={()=>{setOpenDetails(false); setOpenSmall(false); console.log("Clicked");}} className="quit-spot-detailed">
-            <h1 className='cancel-detailed'>X</h1>
-        </div>
-        <div className='spot-names'>
-            <p className='spot-name-description'>Spot Title</p>
-            <h1 className='spot-title'>{title}</h1>
-            <p className='spot-name-description'>Spot Review</p>
-            <h2 className='spot-description'>{review}</h2>
-            <div className='author-div'>
-                <p className='written-by'>Written by</p>
-                <p className='review-author'>{author}</p>
+    <ClickAwayListener onClickAway={()=>{setOpenDetails(false); setOpenSmall(false); console.log("Clicked");}}>
+        <div className='detailed-spot'>
+            <div onClick={()=>{setOpenDetails(false); setOpenSmall(false); console.log("Clicked");}} className="quit-spot-detailed">
+                <h1 className='cancel-detailed'>X</h1>
             </div>
-        </div>
-        <div className='spot-forecast'>
-            {openRating===false && openRatingChoice===false && (
-                <div className='rating-wrapper' onClick={()=> {if(logged && !alreadyRated){
-                    setOpenRating(true);
-                }}}>
-                    <p className='rating-name'>Rating</p>
-                    <h1 className='spot-rating'>{rating}</h1>
-                </div>
-            )}
-            
-            {openRating===true && logged && (
-                <div className='rating-wrapper-rate'>
-                    <p className='rate-question' onClick={()=>{setOpenRatingChoice(true); setOpenRating(false);}}>Rate Spot</p>
-                    <h1 className='cancel-rate' onClick={()=>{setOpenRating(false); setOpenRatingChoice(false);}}>Cancel</h1>
-                </div>
-            )}
-            {openRatingChoice === true && (
-                <div className='rating-choice-wrapper'>
-                    <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(1); setOpenRating(false); setOpenRatingChoice(false); addRating(1);}}/>
-                    <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(2); setOpenRating(false); setOpenRatingChoice(false); addRating(2);}}/>
-                    <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(3); setOpenRating(false); setOpenRatingChoice(false); addRating(3);}}/>
-                    <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(4); setOpenRating(false); setOpenRatingChoice(false); addRating(4);}}/>
-                    <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(5); setOpenRating(false); setOpenRatingChoice(false); addRating(5);}}/>
-                </div>
-            )}
-            <div className='surf-conditions'>
-                <div className='waves'>
-                    <div className='upper-waves'>
-                        <p className='conditions-name'>Wave Conditions</p>
-                    </div>
-                    <div className='bottom-waves'>
-                        <div className='wave-height'>
-                            <img src={Wave} className="conditions-card-icon" alt="wave"/>
-                            <div className='value-div'>
-                                <h1 className='conditions-value'>{swell} </h1>
-                                <p className='condition-unit'>m</p>
-                            </div>
-                        </div>
-                        <div className='period'>
-                            <img src={Timer} className="conditions-card-icon" alt="wave"/>
-                            <div className='value-div'>
-                                <h1 className='conditions-value'>{period}</h1>
-                                <p className='condition-unit'>s</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className='wind'>
-                    <div className='upper-wind'>
-                        <p className='conditions-name'>Wind Conditions</p>
-                    </div>
-
-                    <div className='bottom-wind'>
-                        <div className='wind-speed'>
-                            <img src={Speed} className="conditions-card-icon" alt="wave"/>
-                            
-                            <div className='value-div'>
-                            <h1 className='conditions-value'>{windSpeedKm}</h1>
-                                <p className='condition-unit'>km/s</p>
-                            </div>
-                        </div>
-                        <div className='wind-direction'>
-                            <img src={directionIcon} alt="wind-direction" className="conditions-card-icon-direction"/>
-                        </div>
-
-                    </div>
-
+            <div className='spot-names'>
+                <p className='spot-name-description'>Spot Title</p>
+                <h1 className='spot-title'>{title}</h1>
+                <p className='spot-name-description'>Spot Review</p>
+                <h2 className='spot-description'>{review}</h2>
+                <div className='author-div'>
+                    <p className='written-by'>Written by</p>
+                    <p className='review-author'>{author}</p>
                 </div>
             </div>
-            <div className='weather'>
-                <div className='today'>
-                    <p className='today-descriptor'>{today}</p>
-                    <div className='today-card'>
-                        <img src={weatherIcon} className="today-weather-icon" alt="weather icon"/>
-                        <div className='today-temperature'>
-                            <p className='today-celsius'>Hi: {maxTemp} °C</p>
-                            <p className='today-celsius'>Lo: {minTemp} °C</p>
+            <div className='spot-forecast'>
+                {openRating===false && openRatingChoice===false && (
+                    <div className='rating-wrapper' onClick={()=> {if(logged && !alreadyRated){
+                        setOpenRating(true);
+                    }}}>
+                        <p className='rating-name'>Rating</p>
+                        <h1 className='spot-rating'>{rating}</h1>
+                    </div>
+                )}
+                
+                {openRating===true && logged && (
+                    <div className='rating-wrapper-rate'>
+                        <p className='rate-question' onClick={()=>{setOpenRatingChoice(true); setOpenRating(false);}}>Rate Spot</p>
+                        <h1 className='cancel-rate' onClick={()=>{setOpenRating(false); setOpenRatingChoice(false);}}>Cancel</h1>
+                    </div>
+                )}
+                {openRatingChoice === true && (
+                    <div className='rating-choice-wrapper'>
+                        <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(1); setOpenRating(false); setOpenRatingChoice(false); addRating(1);}}/>
+                        <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(2); setOpenRating(false); setOpenRatingChoice(false); addRating(2);}}/>
+                        <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(3); setOpenRating(false); setOpenRatingChoice(false); addRating(3);}}/>
+                        <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(4); setOpenRating(false); setOpenRatingChoice(false); addRating(4);}}/>
+                        <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(5); setOpenRating(false); setOpenRatingChoice(false); addRating(5);}}/>
+                    </div>
+                )}
+                <div className='surf-conditions'>
+                    <div className='waves'>
+                        <div className='upper-waves'>
+                            <p className='conditions-name'>Wave Conditions</p>
                         </div>
+                        <div className='bottom-waves'>
+                            <div className='wave-height'>
+                                <img src={Wave} className="conditions-card-icon" alt="wave"/>
+                                <div className='value-div'>
+                                    <h1 className='conditions-value'>{swell} </h1>
+                                    <p className='condition-unit'>m</p>
+                                </div>
+                            </div>
+                            <div className='period'>
+                                <img src={Timer} className="conditions-card-icon" alt="wave"/>
+                                <div className='value-div'>
+                                    <h1 className='conditions-value'>{period}</h1>
+                                    <p className='condition-unit'>s</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div className='wind'>
+                        <div className='upper-wind'>
+                            <p className='conditions-name'>Wind Conditions</p>
+                        </div>
+
+                        <div className='bottom-wind'>
+                            <div className='wind-speed'>
+                                <img src={Speed} className="conditions-card-icon" alt="wave"/>
+                                
+                                <div className='value-div'>
+                                <h1 className='conditions-value'>{windSpeedKm}</h1>
+                                    <p className='condition-unit'>km/s</p>
+                                </div>
+                            </div>
+                            <div className='wind-direction'>
+                                <img src={directionIcon} alt="wind-direction" className="conditions-card-icon-direction"/>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
-                <div className='upcoming'>
-                        <p className='upcoming-descriptor'>{tomorrow}</p>
-                        <div className='upcoming-card'>
-                            <img src={weatherIconTom} className="upcoming-weather-icon" alt="weather icon"/>
-                            <div className='upcoming-temperature'>
-                                <p className='upcoming-celsius'>Hi: {maxTempTom} °C</p>
-                                <p className='upcoming-celsius'>Lo: {minTempTom} °C</p>
+                <div className='weather'>
+                    <div className='today'>
+                        <p className='today-descriptor'>{today}</p>
+                        <div className='today-card'>
+                            <img src={weatherIcon} className="today-weather-icon" alt="weather icon"/>
+                            <div className='today-temperature'>
+                                <p className='today-celsius'>Hi: {maxTemp} °C</p>
+                                <p className='today-celsius'>Lo: {minTemp} °C</p>
                             </div>
                         </div>
                     </div>
                     <div className='upcoming'>
-                        <p className='upcoming-descriptor'>{afterTomorrow}</p>
-                        <div className='upcoming-card'>
-                            <img src={weatherIconAft} className="upcoming-weather-icon" alt="weather icon"/>
-                            <div className='upcoming-temperature'>
-                                <p className='upcoming-celsius'>Hi: {maxTempAft} °C</p>
-                                <p className='upcoming-celsius'>Lo: {minTempAft} °C</p>
+                            <p className='upcoming-descriptor'>{tomorrow}</p>
+                            <div className='upcoming-card'>
+                                <img src={weatherIconTom} className="upcoming-weather-icon" alt="weather icon"/>
+                                <div className='upcoming-temperature'>
+                                    <p className='upcoming-celsius'>Hi: {maxTempTom} °C</p>
+                                    <p className='upcoming-celsius'>Lo: {minTempTom} °C</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                
+                        <div className='upcoming'>
+                            <p className='upcoming-descriptor'>{afterTomorrow}</p>
+                            <div className='upcoming-card'>
+                                <img src={weatherIconAft} className="upcoming-weather-icon" alt="weather icon"/>
+                                <div className='upcoming-temperature'>
+                                    <p className='upcoming-celsius'>Hi: {maxTempAft} °C</p>
+                                    <p className='upcoming-celsius'>Lo: {minTempAft} °C</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+
+                </div>
+            </div>
+            <div className='charts'>
 
             </div>
         </div>
-        <div className='charts'>
+    </ClickAwayListener>
 
-        </div>
-    </div>
+
     //Transition to another div, which has all the comments
     //Make sure to add export PDF option for forecast
   )
