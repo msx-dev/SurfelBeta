@@ -124,3 +124,9 @@
     height: 150px;
     justify-content: space-around;
 }
+
+.avatar-wrapper{
+    width: 80px;
+    display: flex;
+    justify-content: center;
+}

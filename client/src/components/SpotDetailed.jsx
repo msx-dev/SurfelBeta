@@ -60,8 +60,6 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                 const response = await axios.post("/users/ratedPosts", user);
                 //console.log(response.data.rated);
                 const rated = response.data.rated;
-                console.log(rated);
-                console.log(pinId);
                 
                 if(rated.includes(pinId)){
                     setAlreadyRated(true);
@@ -73,6 +71,27 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
 
         getSpotIds();
     }, [])
+
+    useEffect(()=> {
+        const getSpotIds = async () => {
+            try {
+                const user = {
+                    user_id: userId
+                }
+                const response = await axios.post("/users/ratedPosts", user);
+                //console.log(response.data.rated);
+                const rated = response.data.rated;
+                
+                if(rated.includes(pinId)){
+                    setAlreadyRated(true);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        getSpotIds();
+    }, [userRating])
 
 
     //Get Forecast for current day
@@ -99,6 +118,8 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                 windSpeed = windSpeed * 3.6;
                 windSpeed= Math.round(windSpeed * 10) / 10;
                 setWindSpeedKm(windSpeed);
+
+                console.log(weatherForecast.main)
 
                 //Set min and max temperature for today, round to 1 decimal
                 const todayMax = Math.round(weatherForecast.main["temp_max"]);
@@ -201,11 +222,13 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                         //Wind speed in meters/second
                         weatherForecast = result;
                         
+                        
                     });
                 
                 //Tomorrow forecast
                 const tomorrowWeather = weatherForecast.list[8].weather[0];
                 const tomorrowWind = weatherForecast.list[8].wind;
+
                 
                 //Tomorrow values
                 const tomorrowWeatherStatus = tomorrowWeather.id;
@@ -366,9 +389,6 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                 afterTomorrowNum = 1;
             }
 
-
-            console.log(todayNum, tomorrowNum)
-            console.log(typeof(weekday[todayNum]))
             setToday(weekday[todayNum]);
             setTomorrow(weekday[tomorrowNum]);
             setAfterTomorrow(weekday[afterTomorrowNum]);
@@ -389,8 +409,6 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
 
         try {
             const response = await axios.post("/pins/rate", data);
-
-            console.log(response);
         } catch (error) {
             
         }

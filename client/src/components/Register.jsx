@@ -115,22 +115,41 @@ export default function Register({setRegister, storedData, setCurrentUser, setAv
             </div>
         ) : (
             <div className="avatar-div">
-                <h1 className='cancel'>X</h1>
                 <h1 className="form-heading">Select avatar</h1>
                 <div className="avatar-options">
                     <div className="avatar-row">
-                        <img onClick={()=>handleAvatar(1)} className="avatar" src={Avatar1} alt="Avatar"/>
-                        <img onClick={()=>handleAvatar(2)} className="avatar" src={Avatar2} alt="Avatar"/>
-                        <img onClick={()=>handleAvatar(3)} className="avatar" src={Avatar3} alt="Avatar"/>
-                        <img onClick={()=>handleAvatar(4)} className="avatar" src={Avatar4} alt="Avatar"/>
-                        <img onClick={()=>handleAvatar(5)} className="avatar" src={Avatar5} alt="Avatar"/>
+                        <div className="avatar-wrapper">
+                            <img onClick={()=>handleAvatar(1)} className="avatar" src={Avatar1} alt="Avatar"/>
+                        </div>
+                        <div className="avatar-wrapper">
+                            <img onClick={()=>handleAvatar(2)} className="avatar" src={Avatar2} alt="Avatar"/>
+                        </div>
+                        <div className="avatar-wrapper">
+                            <img onClick={()=>handleAvatar(3)} className="avatar" src={Avatar3} alt="Avatar"/>
+                        </div>
+                        <div className="avatar-wrapper">
+                            <img onClick={()=>handleAvatar(4)} className="avatar" src={Avatar4} alt="Avatar"/>
+                        </div>
+                        <div className="avatar-wrapper">
+                            <img onClick={()=>handleAvatar(5)} className="avatar" src={Avatar5} alt="Avatar"/>
+                        </div>
                     </div>
                     <div className="avatar-row">
-                        <img onClick={()=>handleAvatar(6)} className="avatar" src={Avatar6} alt="Avatar"/>
-                        <img onClick={()=>handleAvatar(7)} className="avatar" src={Avatar7} alt="Avatar"/>
-                        <img onClick={()=>handleAvatar(8)} className="avatar" src={Avatar8} alt="Avatar"/>
-                        <img onClick={()=>handleAvatar(9)} className="avatar" src={Avatar9} alt="Avatar"/>
-                        <img onClick={()=>handleAvatar(10)} className="avatar" src={Avatar10} alt="Avatar"/>
+                        <div className="avatar-wrapper">
+                            <img onClick={()=>handleAvatar(6)} className="avatar" src={Avatar6} alt="Avatar"/>
+                        </div>
+                        <div className="avatar-wrapper">
+                            <img onClick={()=>handleAvatar(7)} className="avatar" src={Avatar7} alt="Avatar"/>
+                        </div>
+                        <div className="avatar-wrapper">
+                            <img onClick={()=>handleAvatar(8)} className="avatar" src={Avatar8} alt="Avatar"/>
+                        </div>
+                        <div className="avatar-wrapper">
+                            <img onClick={()=>handleAvatar(9)} className="avatar" src={Avatar9} alt="Avatar"/>
+                        </div>
+                        <div className="avatar-wrapper">
+                            <img onClick={()=>handleAvatar(10)} className="avatar" src={Avatar10} alt="Avatar"/>
+                        </div>
                     </div>
                 </div>
             </div>

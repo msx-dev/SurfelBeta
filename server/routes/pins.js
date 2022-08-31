@@ -7,8 +7,21 @@ const mongoose = require("mongoose");
 //Create a new Pin
 router.post("/", async (req, res)=> {
     const pin = new Pin(req.body);
+
+    const user_id = req.body.user_id;
+   
     try {
         const savedPin = await pin.save();
+        const newPinID = savedPin._id.toString();
+
+        await User.findByIdAndUpdate(user_id,{
+            $addToSet: {
+                rated: [newPinID]
+            }
+        })
+
+        
+
         res.status(200).json(savedPin);
     } catch (error) {
         res.json(error.message);

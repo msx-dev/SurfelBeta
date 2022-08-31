@@ -11,6 +11,7 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
     const [forecastID, setForecastID] = useState("");
     const [remaining, setRemaining] = useState(0);
     const [currentUser, setCurrentUser] = useState(storedData.getItem("user"));
+    const [userId, setUserId] = useState(storedData.getItem("u_id"));
 
 
 
@@ -25,7 +26,8 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
           title: title,
           all_ratings: 1,
           all_ratings_sum: rating,
-          forecastID: forecastID
+          forecastID: forecastID,
+          user_id: userId
         }
   
         try {
