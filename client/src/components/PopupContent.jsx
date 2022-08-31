@@ -8,10 +8,8 @@ export default function PopupContent({title, rating, setOpenDetails, setClickedI
         <label>Title</label>
         <h2>{title}</h2>
         <label>Rating</label>
-        {Array(rating).fill(<GiWaveSurfer/>)}
-        <button onClick={()=>{setOpenDetails(true); setClickedId(null); setOpenSmall(false);}}>OPEN DETAILS</button>
-
-        
+        <p>{rating}</p>
+        <button onClick={()=>{setOpenDetails(true); setOpenSmall(false);}}>OPEN DETAILS</button>
     </div>
   )
 }

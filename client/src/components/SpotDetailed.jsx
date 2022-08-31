@@ -20,10 +20,11 @@ import { averagePeriod } from '../functions/getAveragePeriod';
 import { getWeatherString } from '../functions/getWeatherString';
 import { getWindDirection } from '../functions/getWindDirection';
 import { GiWaveSurfer } from 'react-icons/gi';
+import axios from 'axios';
 
 
 
-export default function SpotDetailed({latitude, longitude, setOpenDetails, title, review, author, rating, setOpenSmall}) {
+export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId, title, review, author, rating, setOpenSmall, storedData}) {
     const [swell, setSwell] = useState(0);
     const [period, setPeriod] = useState(0);
     const [weatherIcon, setWeatherIcon] = useState();
@@ -44,6 +45,34 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
     const [tomorrow, setTomorrow] = useState();
     const [afterTomorrow, setAfterTomorrow] = useState();
     const [openRatingChoice, setOpenRatingChoice] = useState(false);
+    const [userRating, setUserRating] = useState(0);
+    const [logged, setLogged] = useState(storedData.getItem("user"));
+    const [userId, setUserId] = useState(storedData.getItem("u_id"));
+    const [alreadyRated, setAlreadyRated] = useState(false);
+
+    //Get rated spot ids for current user
+    useEffect(()=> {
+        const getSpotIds = async () => {
+            try {
+                const user = {
+                    user_id: userId
+                }
+                const response = await axios.post("/users/ratedPosts", user);
+                //console.log(response.data.rated);
+                const rated = response.data.rated;
+                console.log(rated);
+                console.log(pinId);
+                
+                if(rated.includes(pinId)){
+                    setAlreadyRated(true);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        getSpotIds();
+    }, [])
 
 
     //Get Forecast for current day
@@ -350,11 +379,28 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
 
     }, [])
 
+    const addRating = async (rate) => {
+
+        const data = {
+            id: pinId,
+            rating: rate,
+            user_id: storedData.getItem("u_id")
+        }
+
+        try {
+            const response = await axios.post("/pins/rate", data);
+
+            console.log(response);
+        } catch (error) {
+            
+        }
+    }
+
 
    
   return (
     <div className='detailed-spot'>
-        <h1 className='cancel' onClick={()=>{setOpenDetails(false); setOpenSmall(false);}}>X</h1>
+        <h1 className='cancel-detailed' onClick={()=>{setOpenDetails(false); setOpenSmall(false); console.log("Clicked");}}>X</h1>
         <div className='spot-names'>
             <p className='spot-name-description'>Spot Title</p>
             <h1 className='spot-title'>{title}</h1>
@@ -366,26 +412,28 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, title
             </div>
         </div>
         <div className='spot-forecast'>
-            {openRating===false && (
-                <div className='rating-wrapper' onClick={()=>setOpenRating(true)}>
+            {openRating===false && openRatingChoice===false && (
+                <div className='rating-wrapper' onClick={()=> {if(logged && !alreadyRated){
+                    setOpenRating(true);
+                }}}>
                     <p className='rating-name'>Rating</p>
                     <h1 className='spot-rating'>{rating}</h1>
                 </div>
             )}
             
-            {openRating===true && (
+            {openRating===true && logged && (
                 <div className='rating-wrapper-rate'>
-                    <p className='rate-question' onClick={()=>console.log("Open rate dialog")}>Rate Spot</p>
-                    <h1 className='cancel-rate' onClick={()=>{setOpenRating(false); setOpenRatingChoice(true);}}>Cancel</h1>
+                    <p className='rate-question' onClick={()=>{setOpenRatingChoice(true); setOpenRating(false);}}>Rate Spot</p>
+                    <h1 className='cancel-rate' onClick={()=>{setOpenRating(false); setOpenRatingChoice(false);}}>Cancel</h1>
                 </div>
             )}
             {openRatingChoice === true && (
                 <div className='rating-choice-wrapper'>
-                    <GiWaveSurfer className='rating-logo' size={50} />
-                    <GiWaveSurfer className='rating-logo' size={50} />
-                    <GiWaveSurfer className='rating-logo' size={50} />
-                    <GiWaveSurfer className='rating-logo' size={50} />
-                    <GiWaveSurfer className='rating-logo' size={50} />
+                    <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(1); setOpenRating(false); setOpenRatingChoice(false); addRating(1);}}/>
+                    <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(2); setOpenRating(false); setOpenRatingChoice(false); addRating(2);}}/>
+                    <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(3); setOpenRating(false); setOpenRatingChoice(false); addRating(3);}}/>
+                    <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(4); setOpenRating(false); setOpenRatingChoice(false); addRating(4);}}/>
+                    <GiWaveSurfer className='rating-logo-spot' size={50} onClick={()=>{setUserRating(5); setOpenRating(false); setOpenRatingChoice(false); addRating(5);}}/>
                 </div>
             )}
             <div className='surf-conditions'>

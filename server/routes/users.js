@@ -91,4 +91,14 @@ router.post("/avatar", async (req, res)=> {
     }
 })
 
+router.post("/ratedPosts", async (req, res)=> {
+    try {
+        const user_id = req.body.user_id;
+        const user = await User.findById(user_id);
+        res.status(200).json({rated: user.rated});
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 module.exports = router;

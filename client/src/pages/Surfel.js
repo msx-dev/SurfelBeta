@@ -178,11 +178,13 @@ function Surfel() {
                 <IoLocationSharp key={pin._id} color= {currentUser === pin.username ? "white" : "#d27e7c"} size={"25"} cursor={"pointer"}/>
               </Marker>
               {(pin._id === clickedId) && openSmall===true && (
+              <div>
                 <Popup key={pin._id} latitude={pin.lat} longitude={pin.long} anchor="left" closeOnClick={false} onClose={()=>setClickedId(null)}>
                   <PopupContent title={pin.title} rating={pin.rating} key={pin._id} setOpenDetails={setOpenDetails} setOpenSmall={setOpenSmall}/>
                 </Popup>
+              </div>
               )}
-              {openDetails && (pin._id === clickedId) && (<SpotDetailed latitude={pin.lat} longitude={pin.long} setOpenSmall={setOpenSmall} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)
+              {openDetails && (pin._id === clickedId) && (<SpotDetailed storedData={storedData} pinId={pin._id} latitude={pin.lat} longitude={pin.long} setOpenSmall={setOpenSmall} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)
                 
               }
             </>
