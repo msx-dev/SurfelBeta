@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import "./SpotDetailed.css";
-import Wave from "../public/forecast/wave.png";
-import Sunny from "../public/forecast/sunny.png";
-import Cloudy from "../public/forecast/cloud.png";
-import Stormy from "../public/forecast/dark-and-stormy.png";
-import Rainy from "../public/forecast/downpour.png";
-import North from "../public/directions/North.png";
-import NorthEast from "../public/directions/NorthEast.png";
-import East from "../public/directions/East.png";
-import SouthEast from "../public/directions/SouthEast.png";
-import South from "../public/directions/South.png";
-import SouthWest from "../public/directions/SouthWest.png";
-import West from "../public/directions/West.png";
-import NorthWest from "../public/directions/NorthWest.png";
-import Timer from "../public/forecast/timer.png";
-import Speed from "../public/forecast/Speed.png"
-import { averageSwell } from '../functions/getAverageSwell';
-import { averagePeriod } from '../functions/getAveragePeriod';
-import { getWeatherString } from '../functions/getWeatherString';
-import { getWindDirection } from '../functions/getWindDirection';
+import Wave from "../../public/forecast/wave.png";
+import Sunny from "../../public/forecast/sunny.png";
+import Cloudy from "../../public/forecast/cloud.png";
+import Stormy from "../../public/forecast/dark-and-stormy.png";
+import Rainy from "../../public/forecast/downpour.png";
+import North from "../../public/directions/North.png";
+import NorthEast from "../../public/directions/NorthEast.png";
+import East from "../../public/directions/East.png";
+import SouthEast from "../../public/directions/SouthEast.png";
+import South from "../../public/directions/South.png";
+import SouthWest from "../../public/directions/SouthWest.png";
+import West from "../../public/directions/West.png";
+import NorthWest from "../../public/directions/NorthWest.png";
+import Timer from "../../public/forecast/timer.png";
+import Speed from "../../public/forecast/Speed.png"
+import { averageSwell } from '../../functions/WeatherFunctions/getAverageSwell';
+import { averagePeriod } from '../../functions/WeatherFunctions/getAveragePeriod';
+import { getWeatherString } from '../../functions/WeatherFunctions/getWeatherString';
+import { getWindDirection } from '../../functions/WeatherFunctions/getWindDirection';
 import { GiWaveSurfer } from 'react-icons/gi';
+import {BiDotsHorizontalRounded} from 'react-icons/bi';
 import axios from 'axios';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
@@ -50,6 +51,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
     const [logged, setLogged] = useState(storedData.getItem("user"));
     const [userId, setUserId] = useState(storedData.getItem("u_id"));
     const [alreadyRated, setAlreadyRated] = useState(false);
+    const [openOptions, setOpenOptions] = useState(false);
 
     //Get rated spot ids for current user
     useEffect(()=> {
@@ -426,6 +428,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
             <div onClick={()=>{setOpenDetails(false); setOpenSmall(false); console.log("Clicked");}} className="quit-spot-detailed">
                 <h1 className='cancel-detailed'>X</h1>
             </div>
+
             <div className='spot-names'>
                 <p className='spot-name-description'>Spot Title</p>
                 <h1 className='spot-title'>{title}</h1>
@@ -436,7 +439,25 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                     <p className='review-author'>{author}</p>
                 </div>
             </div>
+
             <div className='spot-forecast'>
+
+                <div className='forecast-more' onClick={()=>setOpenOptions(true)}>
+                    <BiDotsHorizontalRounded className='rating-logo-spot' size={30}/>
+                </div>
+                {openOptions && (
+                    <ClickAwayListener onClickAway={()=>setOpenOptions(false)}>
+                        <div className='spot-options'>
+                            <h1 className='spot-option1'>Print Forecast</h1>
+                            <h1 className='spot-option2'>Report Spot</h1>
+                        </div>
+                    </ClickAwayListener>
+                )}
+                
+
+
+
+
                 {openRating===false && openRatingChoice===false && (
                     <div className='rating-wrapper' onClick={()=> {if(logged && !alreadyRated){
                         setOpenRating(true);

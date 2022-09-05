@@ -1,7 +1,7 @@
 import './App.css';
 import { Routes, Route} from "react-router-dom";
-import Home from './pages/Home';
-import Surfel from './pages/Surfel';
+import Home from './pages/Home/Home';
+import Surfel from './pages/Surfel/Surfel';
 
 
 function App() {

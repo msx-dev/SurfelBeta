@@ -23,6 +23,8 @@
 .author-div{
     display: flex;
     flex-direction: row;
+    
+    float:right;
 }
 
 .spot-names{
@@ -55,14 +57,14 @@
 }
 
 .spot-name-description{
-    font-size: 12px;
-    margin-bottom: 2px;
+    font-size: 16px;
+    margin-bottom: 5px;
     color: rgb(0, 0, 0);
 }
 
 .spot-title{
     font-size: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     color: rgb(0, 0, 0);
 }
 
@@ -437,4 +439,62 @@
     position: absolute;
     right: 5px;
     top: 5px;
+}
+
+.forecast-more{
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+}
+
+.spot-options{
+    position: absolute;
+    right: 0px;
+    border-top-right-radius: 12px;
+    background-color: rgba(135, 135, 135, 0.512);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    color: white;
+    width: 200px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    animation: 0.5s slide-down-option;
+    margin-top: 0%;
+}
+
+@keyframes slide-down-option {
+    from {
+        height: 0;
+    }
+    to {
+      height: 100px;
+    }
+  }
+
+.spot-option1{
+    border-top-right-radius: 12px;
+    padding: 10px;
+    font-size: 25px;
+    height: 100%;
+    transition: 0.2s;
+    animation: 2s fade-in;
+}
+
+.spot-option2{
+    padding: 10px;
+    font-size: 25px;
+    height: 100%;
+    transition: 0.2s;
+    animation: 2s fade-in;
+}
+
+.spot-option1:hover{
+    background-color: rgba(1, 1, 1, 0.326);
+    cursor: pointer;
+}
+
+.spot-option2:hover{
+    background-color: rgba(1, 1, 1, 0.326);
+    cursor: pointer;
 }

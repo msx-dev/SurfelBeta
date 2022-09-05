@@ -5,21 +5,15 @@ import axios from "axios";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import "./Surfel.css";
 import {IoLocationSharp} from 'react-icons/io5';
-import {GiWaveSurfer} from 'react-icons/gi';
-import {format} from "timeago.js";
-import Register from "../components/Register";
-import Login from "../components/Login";
+import Register from "../../components/Authentication/Register/Register";
+import Login from "../../components/Authentication/Login/Login";
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import GeocoderControl from "../components/GeocoderControl";
-import Avatar10 from "../public/avatars/10.svg";
-
-
-import NewSpot from "../components/NewSpot";
-import UserNavbar from "../components/UserNavbar";
-import NewSurfSpot from "../components/NewSurfSpot";
-import SpotDetailed from "../components/SpotDetailed";
-import PopupContent from "../components/PopupContent";
-import NearbySpots from "../components/NearbySpots";
+import GeocoderControl from "../../components/GeoCoder/GeocoderControl";
+import UserNavbar from "../../components/Navigation/UserNavbar";
+import NewSurfSpot from "../../components/DetailedSpot/SpotDetailed";
+import SpotDetailed from "../../components/DetailedSpot/SpotDetailed";
+import PopupContent from "../../components/Popup/PopupContent";
+import NearbySpots from "../../components/Nearby/NearbySpots/NearbySpots";
 
 
 

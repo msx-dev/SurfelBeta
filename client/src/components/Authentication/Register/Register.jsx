@@ -1,17 +1,17 @@
 import "./Register.css";
-
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import React, { useRef, useState } from 'react'
 import axios from "axios";
-import Avatar1 from "../public/avatars/1.svg";
-import Avatar2 from "../public/avatars/2.svg";
-import Avatar3 from "../public/avatars/3.svg";
-import Avatar4 from "../public/avatars/4.svg";
-import Avatar5 from "../public/avatars/5.svg";
-import Avatar6 from "../public/avatars/6.svg";
-import Avatar7 from "../public/avatars/7.svg";
-import Avatar8 from "../public/avatars/8.svg";
-import Avatar9 from "../public/avatars/9.svg";
-import Avatar10 from "../public/avatars/10.svg";
+import Avatar1 from "../../../public/avatars/1.svg";
+import Avatar2 from "../../../public/avatars/2.svg";
+import Avatar3 from "../../../public/avatars/3.svg";
+import Avatar4 from "../../../public/avatars/4.svg";
+import Avatar5 from "../../../public/avatars/5.svg";
+import Avatar6 from "../../../public/avatars/6.svg";
+import Avatar7 from "../../../public/avatars/7.svg";
+import Avatar8 from "../../../public/avatars/8.svg";
+import Avatar9 from "../../../public/avatars/9.svg";
+import Avatar10 from "../../../public/avatars/10.svg";
 
 export default function Register({setRegister, storedData, setCurrentUser, setAvatar}) {
     const [success, setSuccess] = useState(false);
@@ -93,7 +93,7 @@ export default function Register({setRegister, storedData, setCurrentUser, setAv
 
   return (
     
-    <>
+    <ClickAwayListener onClickAway={()=>setRegister(false)}>
         {avatarSelection === false ? (
             <div className="register-div">
                 <h1 className='cancel' onClick={()=>setRegister(false)}>X</h1>
@@ -157,6 +157,6 @@ export default function Register({setRegister, storedData, setCurrentUser, setAv
 
         )}
         
-    </>
+    </ClickAwayListener>
   )
 }

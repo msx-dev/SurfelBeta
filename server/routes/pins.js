@@ -20,8 +20,6 @@ router.post("/", async (req, res)=> {
             }
         })
 
-        
-
         res.status(200).json(savedPin);
     } catch (error) {
         res.json(error.message);
@@ -111,8 +109,6 @@ router.post("/nearby", async (req, res)=> {
     try {
         const latitude = req.body.latitude;
         const longitude = req.body.longitude;
-
-        console.log(req.body)
 
         const latitudeMin = latitude - 0.2;
         const latitudeMax = latitude + 0.2;

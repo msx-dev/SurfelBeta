@@ -46,16 +46,16 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
         {stage === 1 ? (
             <div className='newspot-input-compartment1'>
                 <h1>Give this spot a title</h1>
-                <input placeholder='title' className='input-form' value={title} onChange={(e)=>setTitle(e.target.value)}/>
+                <input placeholder='Surf n Turf Break' className='input-form' value={title} onChange={(e)=>setTitle(e.target.value)} required/>
                 <h2 className='hint'>It's best to use the name of the beach or perhaps a local name for this spot.</h2>
-                <button onClick={()=>setStage(2)} className='next-button'>Next</button>
+                <button onClick={()=>{if(title){setStage(2)}}} className='next-button'>Next</button>
             </div>
         ): stage === 2 ? (
             <div className='newspot-input-compartment2'>
                 <h1>Give this spot a review</h1>
-                <textarea placeholder='title' className='textarea-form' value = {review} onChange={(e)=>setReview(e.target.value)}/>
+                <textarea placeholder='This an awesome spot! Watch out for rip current tho!' className='textarea-form' value = {review} onChange={(e)=>setReview(e.target.value)} required/>
                 <h2 className='hint'>Tell us a few words about this spot.</h2>
-                <button onClick={()=>setStage(3)} className='next-button'>Next</button>
+                <button onClick={()=>{if(review){setStage(3)}}} className='next-button'>Next</button>
             </div>
         ) : stage === 3 ? (
             <div className='newspot-input-compartment3'>
@@ -78,7 +78,7 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
 
                     </div>
                 )}
-                <h2 className='hint'>It's best to use the name of the beach or perhaps a local name for this spot.</h2>
+                <h2 className='hint'>Give this spot an honest review!</h2>
                 <button onClick={()=>handleSubmit()} className='next-button'>Finish</button>
             </div>
         ) :  

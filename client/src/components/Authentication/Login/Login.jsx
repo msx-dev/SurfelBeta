@@ -1,7 +1,7 @@
 import "./Login.css";
-
 import React, { useRef, useState } from 'react'
 import axios from "axios";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 export default function Login({storedData, setCurrentUser, setLogin, setAvatar, setAdmin}) {
     const [success, setSuccess] = useState(false);
@@ -41,22 +41,24 @@ export default function Login({storedData, setCurrentUser, setLogin, setAvatar, 
     }
 
   return (
-    <div className="login-div">
-        <h1 className='cancel' onClick={()=>setLogin(false)}>X</h1>
-        <h1 className="form-heading">Login</h1>
-        <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
-            <div className="login-inputs">
-                <input className="input-form" type="text" placeholder="Username" ref={nameRef}/>
-                <input className="input-form" type="password" placeholder="Password" ref={passwordRef}/>
-            </div>
-            <div className="form-button-container-login">
-                <button className="form-button" type="submit">Login</button>
-            </div>
-            <div className="form-response-div-login">
-                {success && <span>Success!!</span>}
-                {failure && <span>Oops, something went wrong!</span>}
-            </div>
-        </form>
-    </div>
+    <ClickAwayListener onClickAway={()=> setLogin(false)}>
+        <div className="login-div">
+            <h1 className='cancel' onClick={()=>setLogin(false)}>X</h1>
+            <h1 className="form-heading">Login</h1>
+            <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+                <div className="login-inputs">
+                    <input className="input-form" type="text" placeholder="Username" ref={nameRef}/>
+                    <input className="input-form" type="password" placeholder="Password" ref={passwordRef}/>
+                </div>
+                <div className="form-button-container-login">
+                    <button className="form-button" type="submit">Login</button>
+                </div>
+                <div className="form-response-div-login">
+                    {success && <span>Success!!</span>}
+                    {failure && <span>Oops, something went wrong!</span>}
+                </div>
+            </form>
+        </div>
+    </ClickAwayListener>
   )
 }
