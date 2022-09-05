@@ -107,6 +107,37 @@ router.get("/date", async (req, res)=> {
     }
 })
 
+router.post("/nearby", async (req, res)=> {
+    try {
+        const latitude = req.body.latitude;
+        const longitude = req.body.longitude;
+
+        console.log(req.body)
+
+        const latitudeMin = latitude - 0.2;
+        const latitudeMax = latitude + 0.2;
+
+        const longitudeMin = longitude - 0.2;
+        const longitudeMax = longitude + 0.2;
+
+        
+        const pins = await Pin.find({ 
+            lat: {
+                $gt: latitudeMin,
+                $lt: latitudeMax
+            }, 
+            long: {
+                $gt: longitudeMin,
+                $lt: longitudeMax
+            }
+        });
+
+        res.status(200).json(pins);
+    } catch (error) {
+        res.json(error.message);
+    }
+})
+
 
 
 module.exports = router;

@@ -19,6 +19,7 @@ import UserNavbar from "../components/UserNavbar";
 import NewSurfSpot from "../components/NewSurfSpot";
 import SpotDetailed from "../components/SpotDetailed";
 import PopupContent from "../components/PopupContent";
+import NearbySpots from "../components/NearbySpots";
 
 
 
@@ -47,6 +48,7 @@ function Surfel() {
     const [openDetails, setOpenDetails] = useState(false);
     const [openSmall, setOpenSmall] = useState(false);
     const [admin, setAdmin] = useState(storedData.getItem("admin_key"));
+    const [openNearby, setOpenNearby] = useState(false);
 
     
 
@@ -112,7 +114,6 @@ function Surfel() {
       }
       
     }
-
     
     const handleLogout = () => {
       storedData.removeItem("user");
@@ -206,10 +207,15 @@ function Surfel() {
         <NewSurfSpot storedData={storedData} setPins={setPins} pins={pins} newPin={newPin} setNewPin={setNewPin} setNewSpot={setNewSpot}/>
       )}
 
+      {/* Nearby Spots */}
+      {openNearby && (
+        <NearbySpots setOpenNearby={setOpenNearby} viewState={viewState} pinClicked={pinClicked}/>
+      )}
+
 
       {/* User Navigation */}
       {currentUser ? (
-        <UserNavbar avatar={avatar} setMapView={setMapView} handleLogout={handleLogout} storedData={storedData} setMapStyle={setMapStyle}/>
+        <UserNavbar avatar={avatar} setMapView={setMapView} handleLogout={handleLogout} storedData={storedData} setMapStyle={setMapStyle} setOpenNearby={setOpenNearby}/>
         ) 
       : (
         <div className="user-login-register">

@@ -1,0 +1,45 @@
+.nearby-spot {
+    background-color: rgba(255, 255, 255, 0.412);
+    width: 500px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-height: 500px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 2;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.quit-nearby-spots{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cancel-nearby{
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 20px;
+    z-index: 1000;
+}
+
+.nearby-cards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.nearby-cards {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.nearby-cards::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}

@@ -12,7 +12,7 @@ import Avatar10 from "../public/avatars/10.svg";
 import "./UserNavbar.css";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
-export default function UserNavbar({avatar, handleLogout, storedData, setMapStyle, setMapView}) {
+export default function UserNavbar({avatar, handleLogout, storedData, setMapStyle, setMapView, setOpenNearby}) {
     const [showDropdown, setShowDropdown] = useState(false);
     const [profile, setProfile] = useState(avatar);
 
@@ -58,7 +58,7 @@ export default function UserNavbar({avatar, handleLogout, storedData, setMapStyl
             <ClickAwayListener onClickAway={()=>setShowDropdown(false)}>
                 <div className='dropdown'>
                     <h2 className='dropdown-option' onClick={()=> {mapView(); setShowDropdown(false);}}>Toggle View</h2>
-                    <h2 className='dropdown-option'>Nearby Spots</h2>
+                    <h2 className='dropdown-option' onClick={()=> {setOpenNearby(true); setShowDropdown(false);}}>Nearby Spots</h2>
                     <h2 className='dropdown-option' onClick={handleLogout}>Log Out</h2>
                 </div>
             </ClickAwayListener>
