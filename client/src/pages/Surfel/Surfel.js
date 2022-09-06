@@ -10,7 +10,7 @@ import Login from "../../components/Authentication/Login/Login";
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import GeocoderControl from "../../components/GeoCoder/GeocoderControl";
 import UserNavbar from "../../components/Navigation/UserNavbar";
-import NewSurfSpot from "../../components/DetailedSpot/SpotDetailed";
+import NewSurfSpot from "../../components/NewSpot/NewSurfSpot";
 import SpotDetailed from "../../components/DetailedSpot/SpotDetailed";
 import PopupContent from "../../components/Popup/PopupContent";
 import NearbySpots from "../../components/Nearby/NearbySpots/NearbySpots";
@@ -179,9 +179,9 @@ function Surfel() {
                 </Popup>
               </div>
               )}
-              {openDetails && (pin._id === clickedId) && (<SpotDetailed storedData={storedData} pinId={pin._id} latitude={pin.lat} longitude={pin.long} setOpenSmall={setOpenSmall} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)
-                
-              }
+             {openDetails && (pin._id === clickedId) && (<SpotDetailed storedData={storedData} pinId={pin._id} latitude={pin.lat} longitude={pin.long} setOpenSmall={setOpenSmall} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)}
+
+            
             </>
           ))}
         </>
@@ -192,7 +192,7 @@ function Surfel() {
       {/* Adding New Pin */}
       {(newPin && currentUser && (!newSpot)) && (
         <Popup latitude={newPin.lat} longitude={newPin.long} anchor="left" closeOnClick={false} onClose={()=>setNewPin(null)}>
-            <buton onClick={() => {setNewSpot(true)}}>Add Pin Here?</buton>
+            <buton onClick={()=>setNewSpot(true)}>Add Pin Here?</buton>
             <buton onClick={() => setNewPin(null)}>Cancel</buton>
             {/* */}
           </Popup>

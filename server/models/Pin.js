@@ -41,6 +41,10 @@ const PinSchema = new mongoose.Schema(
         },
         forecastID: {
           type: Number
+        },
+        reported: {
+          type: Boolean,
+          default: false
         }
         
       },
