@@ -59,6 +59,7 @@ export default function UserNavbar({avatar, handleLogout, storedData, setMapStyl
                 <div className='dropdown'>
                     <h2 className='dropdown-option' onClick={()=> {mapView(); setShowDropdown(false);}}>Toggle View</h2>
                     <h2 className='dropdown-option' onClick={()=> {setOpenNearby(true); setShowDropdown(false);}}>Nearby Spots</h2>
+                    <h2 className='dropdown-option' onClick={()=> {setShowDropdown(false);}}>Tutorial</h2>
                     <h2 className='dropdown-option' onClick={handleLogout}>Log Out</h2>
                 </div>
             </ClickAwayListener>

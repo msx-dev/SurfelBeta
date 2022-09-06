@@ -416,6 +416,20 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
         }
     }
 
+    const reportPin = async () => {
+        try {
+            const data = {
+                id: pinId
+            }
+
+            const response = await axios.post("/pins/report", data);
+
+            console.log("Reported Pin!")
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handleClickAway = () => {
         console.log("Clicked away!")
     }
@@ -449,7 +463,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                     <ClickAwayListener onClickAway={()=>setOpenOptions(false)}>
                         <div className='spot-options'>
                             <h1 className='spot-option1'>Print Forecast</h1>
-                            <h1 className='spot-option2'>Report Spot</h1>
+                            <h1 className='spot-option2' onClick={()=> {reportPin(); setOpenOptions(false);}}>Report Spot</h1>
                         </div>
                     </ClickAwayListener>
                 )}

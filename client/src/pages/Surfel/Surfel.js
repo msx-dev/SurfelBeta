@@ -14,6 +14,7 @@ import NewSurfSpot from "../../components/NewSpot/NewSurfSpot";
 import SpotDetailed from "../../components/DetailedSpot/SpotDetailed";
 import PopupContent from "../../components/Popup/PopupContent";
 import NearbySpots from "../../components/Nearby/NearbySpots/NearbySpots";
+import AdminPanel from "../AdminPanel/AdminPanel";
 
 
 
@@ -192,11 +193,14 @@ function Surfel() {
       {/* Adding New Pin */}
       {(newPin && currentUser && (!newSpot)) && (
         <Popup latitude={newPin.lat} longitude={newPin.long} anchor="left" closeOnClick={false} onClose={()=>setNewPin(null)}>
-            <buton onClick={()=>setNewSpot(true)}>Add Pin Here?</buton>
-            <buton onClick={() => setNewPin(null)}>Cancel</buton>
-            {/* */}
+          <div className="popup-content">
+            <buton onClick={()=>setNewSpot(true)} className="add-pin-button">Add Pin Here?</buton>
+            <buton onClick={() => setNewPin(null)} className="cancel-pin-button">Cancel</buton>
+          </div>
           </Popup>
       )}
+
+      {/* New Pin Details Insert */}
       {newPin && currentUser && newSpot && (
         <NewSurfSpot storedData={storedData} setPins={setPins} pins={pins} newPin={newPin} setNewPin={setNewPin} setNewSpot={setNewSpot}/>
       )}
@@ -237,10 +241,7 @@ function Surfel() {
         
       </Map>)}
       {admin===process.env.REACT_APP_ADMIN_KEY && (
-        <div>
-          <h1>Admin Panel</h1>
-          <button onClick={()=>handleLogout()}>Log Out</button>
-        </div>
+        <AdminPanel handleLogout={handleLogout}/>
       )}
     </div>
   );

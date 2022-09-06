@@ -116,3 +116,53 @@
 .mapboxgl-popup-anchor-left .mapboxgl-popup-tip{
     border-right-color: rgba(255, 255, 255, 0.412);
 }
+
+.popup-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.add-pin-button{
+    text-align: center;
+    line-height: 40px;
+    height: 40px;
+    width: 130px;
+    color: black;
+    background-color: rgb(240, 240, 240);
+    border-radius: 4px;
+    border-radius: 4px;
+    align-self: center;
+    margin: 5px 5px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.add-pin-button:hover{
+    background-color: white;
+    cursor: pointer;
+}
+
+.cancel-pin-button{
+    height: 40px;
+    width: 70px;
+    text-align: center;
+    line-height: 40px;
+    color: black;
+    background-color: rgba(255, 157, 157, 0.473);
+    backdrop-filter: blur(10px);
+    border-radius: 4px;
+    border-radius: 4px;
+    align-self: center;
+    margin: 5px 5px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.cancel-pin-button:hover{
+    background-color: rgba(255, 157, 157, 0.735);
+    cursor: pointer;
+}

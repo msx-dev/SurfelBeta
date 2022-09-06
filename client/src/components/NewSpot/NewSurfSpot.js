@@ -79,7 +79,7 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
                     </div>
                 )}
                 <h2 className='hint'>Give this spot an honest review!</h2>
-                <button onClick={()=>handleSubmit()} className='next-button'>Finish</button>
+                <button onClick={()=>{if(rating!==0){handleSubmit()}}} className='next-button'>Finish</button>
             </div>
         ) :  
          (<div></div>) }

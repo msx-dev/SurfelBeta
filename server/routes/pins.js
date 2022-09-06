@@ -134,6 +134,24 @@ router.post("/nearby", async (req, res)=> {
     }
 })
 
+router.post("/report", async (req, res)=> {
+    try {
+        const id = req.body.id;
+        console.log(req.body);
+
+        await Pin.findByIdAndUpdate(id,
+            {
+                reported: true
+            });
+
+        res.status(200).json("Success!");
+    } catch (error) {
+        res.json(error.message);
+    }
+})
+
+
+
 
 
 module.exports = router;
