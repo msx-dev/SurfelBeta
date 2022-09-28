@@ -150,6 +150,25 @@ router.post("/report", async (req, res)=> {
     }
 })
 
+router.get("/reportedPins", async (req, res)=>{
+    try {
+        const reported = await Pin.find({reported: {$eq: true}})
+
+        res.status(200).json(reported)
+    } catch (error) {
+        res.json(error.message);
+    }
+})
+
+router.post("/deletePin", async (req, res)=> {
+    try {
+        const id = req.body.id;
+        await Pin.findByIdAndDelete(id);
+        res.status(200).json("Pin deleted")
+    } catch (error) {
+        res.json(error.message)
+    }
+})
 
 
 

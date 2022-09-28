@@ -23,8 +23,11 @@
 .author-div{
     display: flex;
     flex-direction: row;
-    
     float:right;
+}
+
+.written-by{
+    margin-right: 5px;
 }
 
 .spot-names{

@@ -62,17 +62,99 @@ router.post("/login", async (req, res) => {
 })
 
 router.get("/date", async (req, res)=> {
+
     try {
         const event = new Date(2022, 12, 12);
         console.log(event.toISOString());
-        const users = await User.find({ //query today up to tonight
+        const usersJan = await User.find({ //query today up to tonight
             createdAt: {
-                $gte: new Date(2022, 4, 13),
-                $lt: new Date(2022, 12, 12), 
+                $gte: new Date("2022-01-01T00:00:00.301Z"),
+                $lt: new Date("2022-01-31T23:59:59.301Z"), 
+            }
+        }) 
+        const usersFeb = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-02-01T00:00:00.301Z"),
+                $lt: new Date("2022-02-29T23:59:59.301Z"), 
+            }
+        }) 
+        const usersMar = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-03-01T00:00:00.301Z"),
+                $lt: new Date("2022-03-31T23:59:59.301Z"), 
+            }
+        }) 
+        const usersApr = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-04-01T00:00:00.301Z"),
+                $lt: new Date("2022-04-30T23:59:59.301Z"), 
+            }
+        }) 
+        const usersMay = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-05-01T00:00:00.301Z"),
+                $lt: new Date("2022-05-31T23:59:59.301Z"), 
+            }
+        }) 
+        const usersJun = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-06-01T00:00:00.301Z"),
+                $lt: new Date("2022-06-30T23:59:59.301Z"), 
+            }
+        }) 
+        const usersJul = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-07-01T00:00:00.301Z"),
+                $lt: new Date("2022-07-31T23:59:59.301Z"), 
+            }
+        }) 
+        const usersAug = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-08-01T00:00:00.301Z"),
+                $lt: new Date("2022-08-31T23:59:59.301Z"), 
+            }
+        }) 
+        const usersSep = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-09-01T00:00:00.301Z"),
+                $lt: new Date("2022-09-30T23:59:59.301Z"), 
+            }
+        }) 
+        const usersOct = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-10-01T00:00:00.301Z"),
+                $lt: new Date("2022-10-31T23:59:59.301Z"), 
+            }
+        }) 
+        const usersNov = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-11-01T00:00:00.301Z"),
+                $lt: new Date("2022-11-30T23:59:59.301Z"), 
+            }
+        }) 
+        const usersDec = await User.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-12-01T00:00:00.301Z"),
+                $lt: new Date("2022-12-31T23:59:59.301Z"), 
             }
         }) 
 
-        res.status(200).json(users);
+        const new_users = [
+            usersJan.length, 
+            usersFeb.length, 
+            usersMar.length,
+            usersApr.length,
+            usersMay.length,
+            usersJun.length,
+            usersJul.length,
+            usersAug.length,
+            usersSep.length,
+            usersOct.length,
+            usersNov.length,
+            usersDec.length
+        ]
+
+        res.status(200).json(new_users);
     } catch (error) {
         res.json(error.message);
     }

@@ -449,8 +449,8 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                 <p className='spot-name-description'>Spot Review</p>
                 <h2 className='spot-description'>{review}</h2>
                 <div className='author-div'>
-                    <p className='written-by'>Written by</p>
-                    <p className='review-author'>{author}</p>
+                    <p className='written-by'>Written by </p>
+                    <p className='review-author'> {author}</p>
                 </div>
             </div>
 
