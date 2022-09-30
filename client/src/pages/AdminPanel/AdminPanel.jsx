@@ -12,12 +12,13 @@ import NearbySpots from "../../components/Nearby/NearbySpots/NearbySpots";
 import ReportedSpots from "../../components/ReportedSpots/ReportedSpots";
 import UserChart from "../../components/Charts/UserCharts/UserChart";
 import PinChart from "../../components/Charts/PinCharts/PinChart";
+import AdminStats from "../../components/AdminStats/AdminStats";
 
 export default function AdminPanel({handleLogout}) {
   const storedData = window.localStorage;
   const mapRef = useRef();
   const [viewState, setViewState] = useState({
-        width: "100vw",
+        width: "80vw",
         height: "500px",
         latitude: 29.116021063495054,
         longitude: -13.553147307415657,
@@ -105,9 +106,10 @@ export default function AdminPanel({handleLogout}) {
     
 
   return (
-    <div>
+    <div className="admin-wrapper">
       <h1>Admin Panel</h1>
       <button onClick={()=>handleLogout()}>Log Out</button>
+      <AdminStats/>
       <div className="admin-map-div">
         <Map
             ref={mapRef}
@@ -147,8 +149,7 @@ export default function AdminPanel({handleLogout}) {
 
           
           {/* Displaying Pins */}
-            {(viewState.zoom > 10) ? (
-              <>
+            
               {pins.map(pin =>(
                 <>
                   <Marker key={pin._id} latitude={pin.lat} longitude={pin.long} onClick={e => {
@@ -166,13 +167,13 @@ export default function AdminPanel({handleLogout}) {
                 {openDetails && (pin._id === clickedId) && (<SpotDetailed storedData={storedData} pinId={pin._id} latitude={pin.lat} longitude={pin.long} setOpenSmall={setOpenSmall} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)}
                 </>
               ))}
-            </>
-            ) : <></>}
+            
             
 
             <ReportedSpots setOpenNearby={setOpenNearby} viewState={viewState} pinClicked={pinClicked}/>
  
           </Map>
+          
           <UserChart/>
           <PinChart/>
       

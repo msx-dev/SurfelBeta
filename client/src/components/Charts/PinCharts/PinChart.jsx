@@ -15,7 +15,7 @@ export default function PinChart() {
         labels: labels,
         datasets: [
           {
-            label: 'Rainfall',
+            label: 'New Pins',
             fill: false,
             lineTension: 0.5,
             backgroundColor: 'rgba(75,192,192,1)',
@@ -44,7 +44,7 @@ export default function PinChart() {
       };
 
     useEffect(()=> {
-        const getUsersByMonth = async () => {
+        const getPinsByMonth = async () => {
             
             try {
                 
@@ -52,16 +52,14 @@ export default function PinChart() {
                 const response = await axios.get("/pins/new_date");
                 //console.log(response.data.rated);
                 const monthlyPins = response.data;
-
-                console.log(monthlyPins);
-
+                
                 setPinsMonth(monthlyPins);    
             } catch (error) {
                 console.log(error);
             }
         }
 
-        getUsersByMonth();
+        getPinsByMonth();
     }, [])
 
 

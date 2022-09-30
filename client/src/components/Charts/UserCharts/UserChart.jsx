@@ -15,7 +15,7 @@ export default function UserChart() {
         labels: labels,
         datasets: [
           {
-            label: 'Rainfall',
+            label: 'New Users',
             fill: false,
             lineTension: 0.5,
             backgroundColor: 'rgba(75,192,192,1)',
@@ -52,8 +52,6 @@ export default function UserChart() {
                 const response = await axios.get("/users/date");
                 //console.log(response.data.rated);
                 const monthlyUsers = response.data;
-
-                console.log(monthlyUsers);
 
                 setUsersMonth(monthlyUsers);    
             } catch (error) {
