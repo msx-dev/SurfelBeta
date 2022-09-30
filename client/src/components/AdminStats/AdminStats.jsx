@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import { CalculateGrowth } from "../../functions/Other/CalculateGrowth";
 import GrowthChartPos from "../Charts/GrowthCharts/GrowthChartPos";
+import UserChart from "../Charts/UserCharts/UserChart";
+import PinChart from "../Charts/PinCharts/PinChart";
 
 
 export default function AdminStats() {
@@ -11,10 +13,10 @@ export default function AdminStats() {
     const [allPins, setAllPins] = useState();
     const [pinsMonth, setPinsMonth] = useState([]);
     const [usersMonth, setUsersMonth] = useState([]);
-    const [newPinsGrowth, setNewPinsGrowth] = useState();
-    const [newUsersGrowth, setNewUsersGrowth] = useState();
-    const [newPinsGrowthAbs, setNewPinsGrowthAbs] = useState();
-    const [newUsersGrowthAbs, setNewUsersGrowthAbs] = useState();
+    const [newPinsGrowth, setNewPinsGrowth] = useState(0);
+    const [newUsersGrowth, setNewUsersGrowth] = useState(0);
+    const [newPinsGrowthAbs, setNewPinsGrowthAbs] = useState(0);
+    const [newUsersGrowthAbs, setNewUsersGrowthAbs] = useState(0);
     const [reportedPins, setReportedPins] = useState([]);
 
     const d = new Date();
@@ -102,6 +104,7 @@ export default function AdminStats() {
 
   return (
     <div className="admin-stats">
+    {/* 
         <h1>{allUsers}</h1>
         <h1>{allPins}</h1>
         <h1>{reportedPins}</h1>
@@ -111,6 +114,38 @@ export default function AdminStats() {
         <div style={{ width: 200, height: 200 }}>
         <GrowthChartPos normalValue={newPinsGrowth} absoluteValue={newPinsGrowthAbs}/>
         </div>
+    */}
+        <div className="admin-stat">
+            <div className="admin-stat-chart">
+                <UserChart/>
+            </div>
+            <div className="admin-stat-right">
+                <div className="admin-stat-all">
+                    <h2 className="all-upper">All Users</h2>
+                    <h1 className="all-lower">{allUsers}</h1>
+                </div>
+                <div className="admin-stat-growth">
+                    <GrowthChartPos normalValue={newUsersGrowth} absoluteValue={newUsersGrowthAbs}/>
+                </div>
+            </div>
+        </div>
+       
+
+        <div className="admin-stat">
+            <div className="admin-stat-chart">
+                <PinChart/>
+            </div>
+            <div className="admin-stat-right">
+                <div className="admin-stat-all">
+                    <h2 className="all-upper">All Users</h2>
+                    <h1 className="all-lower">{allUsers}</h1>
+                </div>
+                <div className="admin-stat-growth">
+                    <GrowthChartPos normalValue={newPinsGrowth} absoluteValue={newPinsGrowthAbs}/>
+                </div>
+            </div>
+        </div>
+        
     </div>
   )
 }

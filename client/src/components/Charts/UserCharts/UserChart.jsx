@@ -2,7 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js';
+import "./UserChart.css";
+
 Chart.register(...registerables);
+
 
 export default function UserChart() {
 
@@ -62,8 +65,8 @@ export default function UserChart() {
         getUsersByMonth();
     }, [])
   return (
-    <>
+    <div className='line-chart'>
         <Line options={config} data={data} />
-    </>
+    </div>
   )
 }
