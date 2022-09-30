@@ -5,6 +5,7 @@ import { CalculateGrowth } from "../../functions/Other/CalculateGrowth";
 import GrowthChartPos from "../Charts/GrowthCharts/GrowthChartPos";
 import UserChart from "../Charts/UserCharts/UserChart";
 import PinChart from "../Charts/PinCharts/PinChart";
+import GrowthChartNeg from "../Charts/GrowthCharts/GrowthChartNeg";
 
 
 export default function AdminStats() {
@@ -114,7 +115,7 @@ export default function AdminStats() {
         <div style={{ width: 200, height: 200 }}>
         <GrowthChartPos normalValue={newPinsGrowth} absoluteValue={newPinsGrowthAbs}/>
         </div>
-    */}
+    */} 
         <div className="admin-stat">
             <div className="admin-stat-chart">
                 <UserChart/>
@@ -125,7 +126,10 @@ export default function AdminStats() {
                     <h1 className="all-lower">{allUsers}</h1>
                 </div>
                 <div className="admin-stat-growth">
-                    <GrowthChartPos normalValue={newUsersGrowth} absoluteValue={newUsersGrowthAbs}/>
+                    {newUsersGrowth >= 0 ? (
+                        <GrowthChartPos normalValue={newUsersGrowth} absoluteValue={newUsersGrowthAbs}/>
+                    ) : <GrowthChartNeg normalValue={newUsersGrowth} absoluteValue={newUsersGrowthAbs}/>}
+                    
                 </div>
             </div>
         </div>
@@ -137,11 +141,14 @@ export default function AdminStats() {
             </div>
             <div className="admin-stat-right">
                 <div className="admin-stat-all">
-                    <h2 className="all-upper">All Users</h2>
-                    <h1 className="all-lower">{allUsers}</h1>
+                    <h2 className="all-upper">All Pins</h2>
+                    <h1 className="all-lower">{allPins}</h1>
                 </div>
                 <div className="admin-stat-growth">
-                    <GrowthChartPos normalValue={newPinsGrowth} absoluteValue={newPinsGrowthAbs}/>
+                {newPinsGrowth >= 0 ? (
+                        <GrowthChartPos normalValue={newPinsGrowth} absoluteValue={newPinsGrowthAbs}/>
+                    ) : <GrowthChartNeg normalValue={newPinsGrowth} absoluteValue={newPinsGrowthAbs}/>}
+                    
                 </div>
             </div>
         </div>

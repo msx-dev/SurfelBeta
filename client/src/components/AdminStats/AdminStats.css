@@ -4,17 +4,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 }
 
 .admin-stat{
-    background-color: darkgray;
+    background-color: #343434;
     border-radius: 12px;
-    width: 90%;
+    width: 60%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 20px;
     height: 30vh;
+    min-height: 268px;
+    min-width: 688px;
 }
 
 .admin-stat-left{
@@ -30,16 +33,17 @@
 
 .admin-stat-chart{
     width: 70%;
-    background-color: gray;
+    background-color: #272727;
     border-radius: 12px;
     padding: 10px;
+    max-width: 480px;
 }
 
 .admin-stat-all{
-    background-color: gray;
+    background-color: #272727;
     border-radius: 12px;
-    height: 30%;
-    width: 150px;
+    height: 22%;
+    width: 130px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -47,17 +51,19 @@
 }
 
 .admin-stat-growth{
-    background-color: gray;
-    width: 150px;
-    height: 150px;
+    background-color: #272727;
+    width: 130px;
+    height: 130px;
     padding: 10px;
     border-radius: 12px;
 }
 
 .all-upper{
-
+    color: white;
 }
 
 .all-lower{
     text-align: right;
+    color: white;
 }
+

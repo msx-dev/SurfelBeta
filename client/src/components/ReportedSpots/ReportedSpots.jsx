@@ -7,7 +7,7 @@ import NearbyCard from "../Nearby/NearbyCard/NearbyCard";
 
 
 
-export default function ReportedSpots({viewState, pinClicked}) {
+export default function ReportedSpots({viewState, pinClicked, setOpenNearby}) {
     const [latitude, setLatitude] = useState(viewState.latitude);
     const [longitude, setLongitude] = useState(viewState.longitude);
     const [reported, setReported] = useState([]);
@@ -35,14 +35,14 @@ export default function ReportedSpots({viewState, pinClicked}) {
 
    
   return (
-    <ClickAwayListener>
+    <ClickAwayListener onClickAway={()=>setOpenNearby(false)}>
         <div className='nearby-spot'>
             <div className="quit-nearby-spots">
-                <h1 className='cancel-nearby'>X</h1>
+                <h1 className='cancel-nearby' onClick={()=>setOpenNearby(false)}>X</h1>
             </div>
             <div className="nearby-cards">
                 {reported.map(nearby=> (
-                    <div className="nearby-card-wrapper" onClick={()=>pinClicked(nearby._id, nearby.lat, nearby.long)}>
+                    <div className="nearby-card-wrapper" onClick={()=>pinClicked(nearby._id, nearby.lat-0.008, nearby.long)}>
                         <NearbyCard nearby={nearby}/>
                     </div>
                 ))}

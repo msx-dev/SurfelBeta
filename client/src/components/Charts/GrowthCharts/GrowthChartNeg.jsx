@@ -12,8 +12,6 @@ export default function GrowthChartNeg({absoluteValue, normalValue}) {
     path: {
       // Path color
       stroke: `rgba(171, 55, 55, ${absoluteValue * 30 / 100})`,
-      // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-      strokeLinecap: 'butt',
       // Customize transition animation
       transition: 'stroke-dashoffset 0.5s ease 0s',
       // Rotate the path
@@ -22,16 +20,14 @@ export default function GrowthChartNeg({absoluteValue, normalValue}) {
     // Customize the circle behind the path, i.e. the "total progress"
     trail: {
       // Trail color
-      stroke: '#e3cfcf',
-      // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-      strokeLinecap: 'butt',
+      stroke: 'transparent',
       // Rotate the trail
       transformOrigin: 'center center',
     },
     // Customize the text
     text: {
       // Text color
-      fill: '#f88',
+      fill: 'rgba(171, 55, 55, 1)',
       // Text size
       fontSize: '16px',
     },
@@ -39,7 +35,7 @@ export default function GrowthChartNeg({absoluteValue, normalValue}) {
     background: {
       fill: '#aabfb0',
     },
-  }} value={absoluteValue} text={`${normalValue}%`} />;
+  }} value={absoluteValue} text={`${normalValue}%`} strokeWidth={4}/>;
     </>
   )
 }

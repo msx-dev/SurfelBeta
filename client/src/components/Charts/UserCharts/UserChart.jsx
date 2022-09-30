@@ -18,13 +18,17 @@ export default function UserChart() {
         labels: labels,
         datasets: [
           {
+            borderJoinStyle: 'miter',
+            borderCapStyle: 'butt',
+            pointRadius: 1,
             label: 'New Users',
-            fill: false,
-            lineTension: 0.5,
-            backgroundColor: 'rgba(75,192,192,1)',
-            borderColor: 'rgba(0,0,0,1)',
-            borderWidth: 2,
+            fill: true,
+            lineTension: 0,
+            backgroundColor: 'rgba(75,192,192,0.6)',
+            borderColor: 'rgba(75,192,192,0.2)',
+            borderWidth: 1,
             data: usersMonth
+            
           }
         ]
       }
@@ -33,6 +37,7 @@ export default function UserChart() {
         type: 'line',
         data: data,
         options: {
+          maintainAspectRatio: false,
           responsive: true,
           plugins: {
             legend: {
@@ -40,7 +45,26 @@ export default function UserChart() {
             },
             title: {
               display: true,
-              text: 'Chart.js Line Chart'
+            }
+          },
+          options: {
+            scales: {
+              y: {
+                ticks: {
+                  color: 'red',
+                  font: {
+                    size: 14,
+                  }
+                }
+              },
+              x: {
+                ticks: {
+                  color: 'red',
+                  font: {
+                    size: 14
+                  }
+                }
+              }
             }
           }
         },

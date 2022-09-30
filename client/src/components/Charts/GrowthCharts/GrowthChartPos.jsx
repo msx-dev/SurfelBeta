@@ -13,8 +13,6 @@ export default function GrowthChartPos({normalValue, absoluteValue}) {
     path: {
       // Path color
       stroke: `rgba(78, 181, 105, ${absoluteValue * 30 / 100})`,
-      // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-      strokeLinecap: 'butt',
       // Customize transition animation
       transition: 'stroke-dashoffset 0.5s ease 0s',
       // Rotate the path
@@ -23,7 +21,7 @@ export default function GrowthChartPos({normalValue, absoluteValue}) {
     // Customize the circle behind the path, i.e. the "total progress"
     trail: {
       // Trail color
-      stroke: '#aabfb0',
+      stroke: 'transparent',
       // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
       strokeLinecap: 'butt',
       // Rotate the trail
@@ -32,15 +30,15 @@ export default function GrowthChartPos({normalValue, absoluteValue}) {
     // Customize the text
     text: {
       // Text color
-      fill: '#f88',
+      fill: 'rgba(78, 181, 105, 1)',
       // Text size
       fontSize: '16px',
     },
     // Customize background - only used when the `background` prop is true
     background: {
-      fill: '#aabfb0',
+      fill: 'transparent',
     },
-  }} value={absoluteValue} text={`${normalValue}%`} />;
+  }} value={absoluteValue} text={`${normalValue}%`} strokeWidth={4}/>;
     </>
   )
 }

@@ -13,13 +13,14 @@ import ReportedSpots from "../../components/ReportedSpots/ReportedSpots";
 import UserChart from "../../components/Charts/UserCharts/UserChart";
 import PinChart from "../../components/Charts/PinCharts/PinChart";
 import AdminStats from "../../components/AdminStats/AdminStats";
+import DetailedReported from "../../components/DetailedReported/DetailedReported";
 
 export default function AdminPanel({handleLogout}) {
   const storedData = window.localStorage;
   const mapRef = useRef();
   const [viewState, setViewState] = useState({
-        width: "100%",
-        height: "100%",
+        width: "95%",
+        height: "96%",
         latitude: 29.116021063495054,
         longitude: -13.553147307415657,
         zoom: 14,
@@ -40,6 +41,7 @@ export default function AdminPanel({handleLogout}) {
     const [openSmall, setOpenSmall] = useState(false);
     const [admin, setAdmin] = useState(storedData.getItem("admin_key"));
     const [openNearby, setOpenNearby] = useState(false);
+    const [update, setUpdate] = useState(false);
     
     const [selection, setSelection] = useState("stats");
 
@@ -55,7 +57,17 @@ export default function AdminPanel({handleLogout}) {
       getPins();
     }, [])
 
-    
+    useEffect(()=> {
+      const getPins = async () => {
+        try {
+          const response = await axios.get("pins/reportedPins");
+          setPins(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      getPins();
+    }, [update])
 
 
     useEffect(()=> {
@@ -181,11 +193,9 @@ export default function AdminPanel({handleLogout}) {
 
       <div className="admin-panel">
         <div className="admin-controls">
-          <button onClick={()=> setSelection("stats")}>Stats</button>
-          <button onClick={()=> setSelection("map")}>Map</button>
-          <button onClick={()=> setSelection("users")}>Users</button>
-          <button onClick={()=> setSelection("pins")}>Pins</button>
-          <button onClick={()=>handleLogout()}>Log Out</button>
+          <button className="admin-button" onClick={()=> setSelection("stats")}>Stats</button>
+          <button className="admin-button" onClick={()=> setSelection("map")}>Map</button>
+          <button className="admin-button-last" onClick={()=>handleLogout()}>Log Out</button>
         </div>
         <div className="admin-views">
           {selection === "users" ? (<UserChart/>) : 
@@ -242,14 +252,13 @@ export default function AdminPanel({handleLogout}) {
                           </Popup>
                         </div>
                         )}
-                      {openDetails && (pin._id === clickedId) && (<SpotDetailed storedData={storedData} pinId={pin._id} latitude={pin.lat} longitude={pin.long} setOpenSmall={setOpenSmall} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)}
+                      {openDetails && (pin._id === clickedId) && (<DetailedReported setUpdate={setUpdate} storedData={storedData} pinId={pin._id} latitude={pin.lat} longitude={pin.long} setOpenSmall={setOpenSmall} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)}
                       </>
                     ))}
+                  {!openNearby && <button className="open-reported" onClick={()=>setOpenNearby(true)}>Open Reported Spots</button>}
+                          
+                  {openNearby && <ReportedSpots setOpenNearby={setOpenNearby} viewState={viewState} pinClicked={pinClicked}/>}
                   
-                  
-
-                  <ReportedSpots setOpenNearby={setOpenNearby} viewState={viewState} pinClicked={pinClicked}/>
-      
                 </Map>
             </div>
           ) : <AdminStats/>}

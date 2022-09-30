@@ -188,7 +188,12 @@ router.post("/ratedPosts", async (req, res)=> {
     try {
         const user_id = req.body.user_id;
         const user = await User.findById(user_id);
-        res.status(200).json({rated: user.rated});
+        if(user.rated === null){
+            res.status(200).json("Nothing rated yet")
+        }else{
+            res.status(200).json({rated: user.rated});
+        }
+        
     } catch (error) {
         console.log(error);
     }

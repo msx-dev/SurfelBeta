@@ -102,7 +102,7 @@ router.post("/rate", async (req, res)=> {
 router.get("/date", async (req, res)=> {
     try {
         const event = new Date(2022, 12, 12);
-        console.log(event.toISOString());
+
         const users = await Pin.find({ //query today up to tonight
             createdAt: {
                 $gte: new Date(2022, 4, 13),
@@ -148,7 +148,6 @@ router.post("/nearby", async (req, res)=> {
 router.post("/report", async (req, res)=> {
     try {
         const id = req.body.id;
-        console.log(req.body);
 
         await Pin.findByIdAndUpdate(id,
             {
@@ -174,6 +173,7 @@ router.get("/reportedPins", async (req, res)=>{
 router.post("/deletePin", async (req, res)=> {
     try {
         const id = req.body.id;
+
         await Pin.findByIdAndDelete(id);
         res.status(200).json("Pin deleted")
     } catch (error) {
