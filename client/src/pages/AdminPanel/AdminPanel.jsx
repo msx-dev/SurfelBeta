@@ -10,6 +10,8 @@ import axios from "axios";
 import UserNavbar from "../../components/Navigation/UserNavbar";
 import NearbySpots from "../../components/Nearby/NearbySpots/NearbySpots";
 import ReportedSpots from "../../components/ReportedSpots/ReportedSpots";
+import UserChart from "../../components/Charts/UserCharts/UserChart";
+import PinChart from "../../components/Charts/PinCharts/PinChart";
 
 export default function AdminPanel({handleLogout}) {
   const storedData = window.localStorage;
@@ -171,6 +173,8 @@ export default function AdminPanel({handleLogout}) {
             <ReportedSpots setOpenNearby={setOpenNearby} viewState={viewState} pinClicked={pinClicked}/>
  
           </Map>
+          <UserChart/>
+          <PinChart/>
       
       </div>
     </div>

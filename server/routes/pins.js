@@ -170,6 +170,104 @@ router.post("/deletePin", async (req, res)=> {
     }
 })
 
+router.get("/new_date", async (req, res)=> {
+
+    try {
+        
+        const pinsJan = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-01-01T00:00:00.301Z"),
+                $lt: new Date("2022-01-31T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsFeb = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-02-01T00:00:00.301Z"),
+                $lt: new Date("2022-02-29T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsMar = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-03-01T00:00:00.301Z"),
+                $lt: new Date("2022-03-31T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsApr = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-04-01T00:00:00.301Z"),
+                $lt: new Date("2022-04-30T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsMay = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-05-01T00:00:00.301Z"),
+                $lt: new Date("2022-05-31T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsJun = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-06-01T00:00:00.301Z"),
+                $lt: new Date("2022-06-30T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsJul = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-07-01T00:00:00.301Z"),
+                $lt: new Date("2022-07-31T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsAug = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-08-01T00:00:00.301Z"),
+                $lt: new Date("2022-08-31T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsSep = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-09-01T00:00:00.301Z"),
+                $lt: new Date("2022-09-30T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsOct = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-10-01T00:00:00.301Z"),
+                $lt: new Date("2022-10-31T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsNov = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-11-01T00:00:00.301Z"),
+                $lt: new Date("2022-11-30T23:59:59.301Z"), 
+            }
+        }) 
+        const pinsDec = await Pin.find({ //query today up to tonight
+            createdAt: {
+                $gte: new Date("2022-12-01T00:00:00.301Z"),
+                $lt: new Date("2022-12-31T23:59:59.301Z"), 
+            }
+        }) 
+
+        const new_pins = [
+            pinsJan.length, 
+            pinsFeb.length, 
+            pinsMar.length,
+            pinsApr.length,
+            pinsMay.length,
+            pinsJun.length,
+            pinsJul.length,
+            pinsAug.length,
+            pinsSep.length,
+            pinsOct.length,
+            pinsNov.length,
+            pinsDec.length
+        ]
+
+        res.status(200).json(new_pins);
+    } catch (error) {
+        res.json(error.message);
+    }
+})
+
 
 
 
