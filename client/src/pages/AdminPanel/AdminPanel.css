@@ -1,10 +1,34 @@
 .admin-wrapper{
     display: flex;
+    height: 100vh;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .admin-map-div{
-    width: 80vw;
-    height: 500px;
+    width: 100%;
+    height: 100%;
+}
+
+.admin-panel{
+    width: 95vw;
+    height: 95vh;
+    background-color: rgb(24, 24, 24);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+}
+
+.admin-controls{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-views{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

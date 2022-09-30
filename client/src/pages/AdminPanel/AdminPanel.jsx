@@ -18,8 +18,8 @@ export default function AdminPanel({handleLogout}) {
   const storedData = window.localStorage;
   const mapRef = useRef();
   const [viewState, setViewState] = useState({
-        width: "80vw",
-        height: "500px",
+        width: "100%",
+        height: "100%",
         latitude: 29.116021063495054,
         longitude: -13.553147307415657,
         zoom: 14,
@@ -40,6 +40,8 @@ export default function AdminPanel({handleLogout}) {
     const [openSmall, setOpenSmall] = useState(false);
     const [admin, setAdmin] = useState(storedData.getItem("admin_key"));
     const [openNearby, setOpenNearby] = useState(false);
+    
+    const [selection, setSelection] = useState("stats");
 
     useEffect(()=> {
       const getPins = async () => {
@@ -107,6 +109,7 @@ export default function AdminPanel({handleLogout}) {
 
   return (
     <div className="admin-wrapper">
+      {/* 
       <h1>Admin Panel</h1>
       <button onClick={()=>handleLogout()}>Log Out</button>
       <AdminStats/>
@@ -143,12 +146,8 @@ export default function AdminPanel({handleLogout}) {
             />
 
           
-          {/* Map Controls and Layers*/}
-          
           <Layer {...skyLayer} />
 
-          
-          {/* Displaying Pins */}
             
               {pins.map(pin =>(
                 <>
@@ -177,6 +176,85 @@ export default function AdminPanel({handleLogout}) {
           <UserChart/>
           <PinChart/>
       
+      </div>
+      */}
+
+      <div className="admin-panel">
+        <div className="admin-controls">
+          <button onClick={()=> setSelection("stats")}>Stats</button>
+          <button onClick={()=> setSelection("map")}>Map</button>
+          <button onClick={()=> setSelection("users")}>Users</button>
+          <button onClick={()=> setSelection("pins")}>Pins</button>
+          <button onClick={()=>handleLogout()}>Log Out</button>
+        </div>
+        <div className="admin-views">
+          {selection === "users" ? (<UserChart/>) : 
+          selection === "pins" ? (<PinChart/>) : 
+          selection === "stats" ? (<AdminStats/>) : 
+          selection=== "map" ? (
+            <div className="admin-map-div">
+              <Map
+                  ref={mapRef}
+                  {...viewState}
+                  onMove={evt => setViewState(evt.viewState)}
+                  mapboxAccessToken={process.env.REACT_APP_MAPBOX}
+                  initialViewState={{
+                    longitude: -100,
+                    latitude: 40,
+                    zoom: 3.5,
+                    pitch: 0
+                  }}
+                  maxPitch={70}
+                  transitionDuration = "500"
+                  maxZoom={40}
+                  mapStyle={mapStyle}
+                  terrain={{source: 'mapbox-dem', exaggeration: 1}}
+                  
+                  //mapStyle="mapbox://styles/msude/cl0b56qxj000215qj1qgx7faq"
+                  //mapStyle="mapbox://styles/msude/ckwampov11d2q15odhnlp98v6"
+                  onDblClick={(e)=>addMarker(e)}
+                  doubleClickZoom={false}
+                  
+                >
+                <Source
+                    id="mapbox-dem"
+                    type="raster-dem"
+                    url="mapbox://mapbox.mapbox-terrain-dem-v1"
+                    tileSize={512}
+                    
+                  />
+
+                
+                <Layer {...skyLayer} />
+
+                  
+                    {pins.map(pin =>(
+                      <>
+                        <Marker key={pin._id} latitude={pin.lat} longitude={pin.long} onClick={e => {
+                            pinClicked(pin._id, pin.lat, pin.long);
+                          }}>
+                          <IoLocationSharp key={pin._id} color= {currentUser === pin.username ? "white" : "#d27e7c"} size={"25"} cursor={"pointer"}/>
+                        </Marker>
+                        {(pin._id === clickedId) && openSmall===true && (
+                        <div>
+                          <Popup key={pin._id} latitude={pin.lat} longitude={pin.long} anchor="left" closeOnClick={false} onClose={()=>setClickedId(null)}>
+                            <PopupContent title={pin.title} rating={pin.rating} key={pin._id} setOpenDetails={setOpenDetails} setOpenSmall={setOpenSmall}/>
+                          </Popup>
+                        </div>
+                        )}
+                      {openDetails && (pin._id === clickedId) && (<SpotDetailed storedData={storedData} pinId={pin._id} latitude={pin.lat} longitude={pin.long} setOpenSmall={setOpenSmall} setOpenDetails={setOpenDetails} rating={pin.rating} title={pin.title} review={pin.description} author={pin.username}/>)}
+                      </>
+                    ))}
+                  
+                  
+
+                  <ReportedSpots setOpenNearby={setOpenNearby} viewState={viewState} pinClicked={pinClicked}/>
+      
+                </Map>
+            </div>
+          ) : <AdminStats/>}
+          
+        </div>
       </div>
     </div>
   )

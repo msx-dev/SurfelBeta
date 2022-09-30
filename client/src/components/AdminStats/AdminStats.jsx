@@ -102,7 +102,15 @@ export default function AdminStats() {
 
   return (
     <div className="admin-stats">
+        <h1>{allUsers}</h1>
+        <h1>{allPins}</h1>
+        <h1>{reportedPins}</h1>
+        <div style={{ width: 200, height: 200 }}>
         <GrowthChartPos normalValue={newUsersGrowth} absoluteValue={newUsersGrowthAbs}/>
+        </div>
+        <div style={{ width: 200, height: 200 }}>
+        <GrowthChartPos normalValue={newPinsGrowth} absoluteValue={newPinsGrowthAbs}/>
+        </div>
     </div>
   )
 }
