@@ -1,0 +1,55 @@
+.main-hero{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../public//images/Surfer6.jpeg");
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+#navigation-container {
+    position: absolute;
+    background-color: rgba(12,12,12,0.5);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100vw;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    padding: 5px 15px;
+    opacity: 0.7;
+}
+
+li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navigation-logo{
+    width: 55px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.logo-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo-name{
+    color: white;
+    margin-left: 10px;
+}
