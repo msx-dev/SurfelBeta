@@ -10,7 +10,17 @@
     justify-content: space-around;
     z-index: 2;
     backdrop-filter: blur(10px);
+    animation: 1s slide-up;
 }
+
+@keyframes slide-up {
+    from {
+        height: 0;
+    }
+    to {
+        height: 700px;
+    }
+  }
 
 .spot-forecast{
     padding-bottom: 5%;
@@ -386,6 +396,10 @@
     width: 80%;
 }
 
+.rate-question:hover, .cancel-rate:hover{
+    background-color: #dddddd;
+}
+
 .rate-question:hover{
     cursor: pointer;
 }
@@ -499,5 +513,13 @@
 
 .spot-option2:hover{
     background-color: rgba(1, 1, 1, 0.326);
+    cursor: pointer;
+}
+
+.quit-spot-detailed:hover{
+    cursor: pointer;
+}
+
+.cancel-detailed:hover{
     cursor: pointer;
 }

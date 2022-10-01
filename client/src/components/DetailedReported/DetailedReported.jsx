@@ -83,7 +83,7 @@ export default function DetailedReported({latitude, longitude, setUpdate, setOpe
                     user_id: userId
                 }
                 const response = await axios.post("/users/ratedPosts", user);
-                //console.log(response.data.rated);
+
                 const rated = response.data.rated;
                 
                 if(rated.includes(pinId)){
