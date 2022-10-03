@@ -9,6 +9,36 @@ html {
     background-position: center; 
     background-repeat: no-repeat; 
     background-size: cover;
+    display: flex;
+    align-items:flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.main-title-hero{
+    margin-bottom: 50px;
+    margin-right: 50px;
+    font-weight: bold;
+    font-size: 45px;
+    color: white;
+}
+
+.main-hero-href{
+    margin-bottom: 40vh;
+    margin-right: 50px;
+}
+
+.main-hero-button{
+    background-color: transparent;
+    font-size: 45px;
+    border: 1px solid white;
+    padding: 5px;
+    color: white;
+}
+
+.main-hero-button:hover{
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 #navigation-container {
@@ -72,7 +102,7 @@ ul {
 }
 
 .features{
-    background-image: linear-gradient(140deg, rgb(33, 33, 33), rgb(55, 55, 55));
+    background-image: linear-gradient(140deg, rgb(242, 242, 242), rgb(200, 200, 200));
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -132,14 +162,26 @@ ul {
 }
 
 .card-front {
-    background-color: rgb(48, 48, 48);
+    background-color: rgb(245, 245, 245);
     color: black;
 }
 
 .card-back {
-    background-color: #2980b9;
+    background-color: rgb(245, 245, 245);
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
     transform: rotateY(180deg);
+}
+
+.card-back-text{
+    color: black;
+}
+
+.card-back-title{
+    color: black;
 }
 
 .section-title{
@@ -148,6 +190,14 @@ ul {
     font-size: 40px;
     padding-top: 50px;
 }
+
+.section-title-black{
+    text-align: center;
+    color: black;
+    font-size: 40px;
+    padding-top: 50px;
+}
+
 
 .about{
     background-color: black;
@@ -193,9 +243,20 @@ ul {
     margin-bottom: 60px;
 }
 
+.about-sub-title-right{
+    color: white;
+    text-align: right;
+    margin-bottom: 60px;
+}
+
 .about-paragraph{
     color: white;
-    text-align: left;
+    text-align: justify;
+}
+
+.about-paragraph-right{
+    color: white;
+    text-align:justify;
 }
 
 .about-section-2{
@@ -204,4 +265,10 @@ ul {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+.future{
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
 }
