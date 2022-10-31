@@ -8,7 +8,14 @@ import Device from "../../public/icons/responsive.png";
 import Beach from "../../public/images/MarkersBeach.jpg";
 import Namibia from "../../public/images/Namibia.jpg";
 import Many from "../../public/images/MarkersSurf3.jpg";
-import Analytics from "../../public/images/MarkerAnalytics.jpg"
+import Analytics from "../../public/images/MarkerAnalytics.jpg";
+import AnalyticsFuture from "../../public/icons/AnalyticsFuture.png";
+import UserBase from "../../public/icons/UserBase.png";
+import AIDevice from "../../public/icons/AIDevice.png";
+import Features from "../../public/icons/Features.png";
+import AIIoT from "../../public/images/AIIoT.jpg";
+import UserInteraction from "../../public/images/UserInteraction.jpg";
+
 import { useEffect } from "react";
 import Aos from 'aos';
 import 'aos/dist/aos.css';
@@ -48,67 +55,69 @@ function Home() {
 
       {/* About */}
       <div id="about" className="about">
-        <div className="about-section">
-        <h1 className="section-title">ABOUT</h1>
-        {/* Technology meets surfing, transforming the surf community, Bringing surfers together, power in numbers (35mil), no heavy lifting for users */}
-          <div className="about-section-insides">
-            <div className="about-text-wrapper"  data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="500">
-              <h1 className="about-sub-title">A take on infinity.</h1>
-              <p className="about-paragraph">There are countless surf spots around the world and locating every single one, is 
-              a daunting task, to say the least. Dozens of web forums, applications and maps are trying their best to locate, store and share them with the world. Even the largest
-              forecast applications contain information for only a couple thousand surf spots.
-              </p>
-            </div>
-            <img src={Beach} className="about-image" alt="beach with markers"/>
-          </div>
-        </div>
-
-        <div className="about-section">
-        {/* Technology meets surfing, transforming the surf community, Bringing surfers together, power in numbers (35mil), no heavy lifting for users */}
-          <div className="about-section-insides">
-            <img src={Namibia} className="about-image" alt="beach with markers"/>
-            <div className="about-text-wrapper" data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="500">
-              <h1 className="about-sub-title-right">Locating hidden gems.</h1>
-              <p className="about-paragraph">Many spots are hidden, undocumented, marvels of our oceans. Most of the times, only known
-              to locals. <br/>SurfLog will pave the way to discovery of the rarest spots around the globe. From the vast dunes of the Namib desert, where 
-              the Atlantic Ocean meets the scorching desert, all the way to the freezing waters of Greenland.
-              </p>
+        <div className="about-wrapper">
+          <div className="about-section">
+          <h1 className="section-title">ABOUT</h1>
+          {/* Technology meets surfing, transforming the surf community, Bringing surfers together, power in numbers (35mil), no heavy lifting for users */}
+            <div className="about-section-insides">
+              <div className="about-text-wrapper"  data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="2000">
+                <h1 className="about-sub-title">A take on infinity.</h1>
+                <p className="about-paragraph">There are countless surf spots around the world and locating every single one, is 
+                a daunting task, to say the least. Dozens of web forums, applications and maps are trying their best to locate, store and share them with the world. Even the largest
+                forecast applications contain information for only a couple thousand surf spots.
+                </p>
+              </div>
+              <img src={Beach} className="about-image" alt="beach with markers"/>
             </div>
           </div>
-        </div>
 
-        <div className="about-section">
-        {/* Technology meets surfing, transforming the surf community, Bringing surfers together, power in numbers (35mil), no heavy lifting for users */}
-          <div className="about-section-insides">
-            <div className="about-text-wrapper" data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="500">
-              <h1 className="about-sub-title">Power is in numbers.</h1>
-              <p className="about-paragraph">It's a task, far too heavy, for a single person, but together we can achieve it. <br/>
-              There are approximately 35 million surfers in the world, each with it's favorite spot. Every new surfer 
-              is a step closer to logging all surf breaks in the 5 oceans of the world. <br/><br/>SurfLog is not a business, nor is it a service - it is a community. 
-              </p>
-            </div>
-            <img src={Many} className="about-image-tall" alt="beach with markers"/>
-          </div>
-        </div>
-
-        <div className="about-section">
-        {/* Technology meets surfing, transforming the surf community, Bringing surfers together, power in numbers (35mil), no heavy lifting for users */}
-          <div className="about-section-insides">
-            <img src={Analytics} className="about-image" alt="beach with markers"/>
-            <div className="about-text-wrapper" data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="500">
-              <h1 className="about-sub-title-right">Complex analytics, simple user experience.</h1>
-              <p className="about-paragraph">Forecasting surf conditions is a difficult and time-consuming task. <br/><br/>
-              Hundreds of forecasting apps, covering only a fraction of all surf spots and not containing all the parameters you need. SurfLog 
-              does all the heavy-lifting analytics for users.<br/> Zero guidance needed.
-              </p>
+          <div className="about-section">
+          {/* Technology meets surfing, transforming the surf community, Bringing surfers together, power in numbers (35mil), no heavy lifting for users */}
+            <div className="about-section-insides">
+              <img src={Namibia} className="about-image" alt="beach with markers"/>
+              <div className="about-text-wrapper" data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="2000">
+                <h1 className="about-sub-title-right">Locating hidden gems.</h1>
+                <p className="about-paragraph">Many spots are hidden, undocumented, marvels of our oceans. Most of the times, only known
+                to locals. <br/>SurfLog will pave the way to discovery of the rarest spots around the globe. From the vast dunes of the Namib desert, where 
+                the Atlantic Ocean meets the scorching desert, all the way to the freezing waters of Greenland.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
+          <div className="about-section">
+          {/* Technology meets surfing, transforming the surf community, Bringing surfers together, power in numbers (35mil), no heavy lifting for users */}
+            <div className="about-section-insides">
+              <div className="about-text-wrapper" data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="2000">
+                <h1 className="about-sub-title">Power is in numbers.</h1>
+                <p className="about-paragraph">It's a task, far too heavy, for a single person, but together we can achieve it. <br/>
+                There are approximately 35 million surfers in the world, each with it's favorite spot. Every new surfer 
+                is a step closer to logging all surf breaks in the 5 oceans of the world. <br/><br/>SurfLog is not a business, nor is it a service - it is a community. 
+                </p>
+              </div>
+              <img src={Many} className="about-image-tall" alt="beach with markers"/>
+            </div>
+          </div>
+
+          <div className="about-section">
+          {/* Technology meets surfing, transforming the surf community, Bringing surfers together, power in numbers (35mil), no heavy lifting for users */}
+            <div className="about-section-insides">
+              <img src={Analytics} className="about-image" alt="beach with markers"/>
+              <div className="about-text-wrapper" data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="2000">
+                <h1 className="about-sub-title-right">Complex analytics, <br/>simple user experience.</h1>
+                <p className="about-paragraph">Forecasting surf conditions is a difficult and time-consuming task. <br/><br/>
+                Hundreds of forecasting apps, covering only a fraction of all surf spots and not containing all the parameters you need. SurfLog 
+                does all the heavy-lifting analytics for users.<br/> Zero guidance needed.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Features */}
       <div className="features" id="features">
+        
         <h1 className="section-title-black">FEATURES</h1>
         <div className="features-wrapper">
           <div className="card-wrapper">
@@ -170,7 +179,44 @@ function Home() {
 
       <div className="future" id="future">
         <h1 className="section-title">FUTURE</h1>
+        <div className="future-section">
+          <div className="future-section-insides-1">
+            <img src={UserInteraction} className="future-image" alt="beach with markers"/>
+            <div className="future-text-wrapper" data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="500">
+              <h1 className="future-sub-title">Increasing User Interaction</h1>
+              <p className="future-paragraph">SurfLog will become a large community, with increasing importance on user interaction. Users will have more power in their hands, being able
+              to form groups, plan events, share insights and use the App to improve their surfing skills. 
+              </p>
+            </div>
+          </div>
+        </div>
 
+        <div className="future-section">
+          <div className="future-section-insides">
+            <div className="future-text-wrapper" data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="500">
+              <h1 className="future-sub-title">More, and better features</h1>
+              <p className="future-paragraph">
+                SurfLog will get more data. Surf spots will have more information on weather and ocean forecast, including wind and swell simulations. This means that users will have the power to 
+                get information on current vectors, wind vectors and more complex data. <br/>This will help beginners find suitable newbie waves and assist professional surfers in finding that perfect break.
+              </p>
+            </div>
+            <img src={Features} className="future-image" alt="beach with markers"/>
+          </div>
+        </div>
+
+        <div className="future-section">
+          <div className="future-section-insides">
+            <img src={AIIoT} className="future-image" alt="beach with markers"/>
+            <div className="future-text-wrapper" data-aos="fade-in" data-aos-easing="linear"  data-aos-duration="500">
+              <h1 className="future-sub-title">IoT meets AI</h1>
+              <p className="future-paragraph">
+                SurfLog will get it's own physical device for collecting geopositional and movement data. It will help both beginners and pro-surfers advance in their form, skill and talent. The collected data will be used 
+                to train AI models and analyze users surfing form, visualize progression and guide them through advancements. Apart from that, the device will be capable of using real-time data for calculating break location, line-up location and detecting free space on close-by breaks. 
+                
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

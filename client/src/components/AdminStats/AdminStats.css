@@ -43,6 +43,7 @@
     background-color: #272727;
     border-radius: 12px;
     height: 22%;
+    min-height: 95px;
     width: 130px;
     padding: 10px;
     display: flex;

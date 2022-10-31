@@ -27,7 +27,6 @@ export default function Login({storedData, setCurrentUser, setLogin, setAvatar, 
                 setAvatar(response.data.avatar);
                 setCurrentUser(response.data.username);
             }else if(response.data.user_type === "admin"){
-                console.log("Here ok")
                 storedData.setItem("admin_key", process.env.REACT_APP_ADMIN_KEY);
                 setAdmin(process.env.REACT_APP_ADMIN_KEY);
                 setCurrentUser(response.data.username);
