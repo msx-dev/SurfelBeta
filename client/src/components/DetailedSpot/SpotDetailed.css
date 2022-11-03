@@ -1,5 +1,8 @@
 .detailed-spot{
-    background-color:rgba(255, 255, 255, 0.412);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
     width: 500px;
     position: absolute;
     right: 0;
@@ -9,9 +12,13 @@
     flex-direction: column;
     justify-content: space-around;
     z-index: 2;
-    backdrop-filter: blur(10px);
     animation: 1s slide-up;
+    background-color:rgba(255, 255, 255, 0.412);
+    -webkit-backdrop-filter: blur(10px);
+    -ms-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
+
 
 @keyframes slide-up {
     from {

@@ -53,3 +53,9 @@
     display: flex;
     margin: 0 auto;
 }
+
+@media only screen and (max-width: 400px) {
+    .nearby-spot{
+        width: 100vw;
+    }
+}

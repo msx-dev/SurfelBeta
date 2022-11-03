@@ -14,6 +14,8 @@
     border-radius: 12px;
 }
 
+
+
 .login-form{
     display: flex;
     margin-top: 40px;
@@ -53,6 +55,11 @@
     border: none;
     font-size: 25px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.form-button:hover{
+    cursor: pointer;
 }
 
 .form-button-container-login{
