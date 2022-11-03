@@ -1,6 +1,10 @@
 To run a production build, run this in /client folder:
-npx server -s build
+npx serve -s build
 
 To make it work, I had to replace all the api calls, because production doesn't have access to proxy in package.json
 
 In order for the app to only start from the subpage of /app, the start_url in manifest.json should be  set to "/app".
+
+In order to make it also work on PWA, you have to set the API url to local IP + port.
+
+axios.post("192.xyz.xyz.:5001/api/...)

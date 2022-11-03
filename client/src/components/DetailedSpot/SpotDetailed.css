@@ -13,10 +13,25 @@
     justify-content: space-around;
     z-index: 2;
     animation: 1s slide-up;
-    background-color:rgba(255, 255, 255, 0.412);
+    background-color:rgba(255, 255, 255, 0.904);
     -webkit-backdrop-filter: blur(10px);
     -ms-backdrop-filter: blur(10px);
+    -o-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+}
+
+
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+.detailed-spot {
+    background-color:rgba(255, 255, 255, 0.593) !important;
+    -webkit-backdrop-filter: blur(10px);
+    -ms-backdrop-filter: blur(10px);
+    -o-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
 }
 
 
@@ -48,8 +63,8 @@
 }
 
 .spot-names{
-    margin-top: 5px;
-    margin-left: 2.5%;
+    padding-top: 5px;
+    padding-left: 2.5%;
     width: 480px;
     border-radius: 12px;
 }

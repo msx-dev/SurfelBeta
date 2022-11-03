@@ -15,10 +15,12 @@ import SpotDetailed from "../../components/DetailedSpot/SpotDetailed";
 import PopupContent from "../../components/Popup/PopupContent";
 import NearbySpots from "../../components/Nearby/NearbySpots/NearbySpots";
 import AdminPanel from "../AdminPanel/AdminPanel";
-
-
+import ReactMapGL from "react-map-gl";
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 function Surfel() {
+  
   const storedData = window.localStorage;
   const mapRef = useRef();
   const [viewState, setViewState] = useState({
