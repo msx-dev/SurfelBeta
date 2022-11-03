@@ -181,6 +181,20 @@ router.post("/deletePin", async (req, res)=> {
     }
 })
 
+router.post("/unreportPin", async (req, res)=> {
+    try {
+        const id = req.body.id;
+        
+        await Pin.findByIdAndUpdate(id,
+            {
+                reported: false
+            });
+        res.status(200).json("Success!");
+    } catch (error) {
+        res.json(error.message)
+    }
+})
+
 router.get("/new_date", async (req, res)=> {
 
     try {

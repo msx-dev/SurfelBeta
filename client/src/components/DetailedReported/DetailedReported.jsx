@@ -428,7 +428,23 @@ export default function DetailedReported({latitude, longitude, setUpdate, setOpe
                 setOpenDetails(false);
                 setUpdate(true);
             }
-            console.log(response)
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    const unreportPin = async () => {
+        try {
+            const data = {
+                id: pinId
+            }
+
+            const response = await axios.post("/pins/unreportPin", data);
+            if(response.status === 200){
+                setOpenDetails(false);
+                setUpdate(true);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -462,7 +478,7 @@ export default function DetailedReported({latitude, longitude, setUpdate, setOpe
                 {openOptions && (
                     <ClickAwayListener onClickAway={()=>setOpenOptions(false)}>
                         <div className='spot-options'>
-                            <h1 className='spot-option1'>Print Forecast</h1>
+                            <h1 className='spot-option1' onClick={()=>unreportPin()}>Unreport</h1>
                             <h1 className='spot-option2' onClick={()=>{deletePin()}}>Delete Spot</h1>
                         </div>
                     </ClickAwayListener>

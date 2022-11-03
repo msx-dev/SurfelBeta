@@ -18,7 +18,7 @@
         height: 0;
     }
     to {
-        height: 700px;
+        height: 710px;
     }
   }
 
@@ -523,3 +523,102 @@
 .cancel-detailed:hover{
     cursor: pointer;
 }
+
+@media only screen and (max-width: 500px) {
+    .detailed-spot{
+        width: 100vw;
+        z-index: 100;
+    }
+
+    .spot-description{
+        width: 100vw;
+    }
+
+    .spot-title{
+        width: 100vw;
+    }
+
+    .spot-names{
+        width: 100vw;
+    }
+
+    .author-div{
+        margin-right: 20px;
+    }
+
+}
+
+@media only screen and (max-width: 396px) {
+    .today-card{
+        width: 100px;
+        height: 70%;
+    }
+
+    .today-weather-icon{
+        width: 60px;
+    }
+
+    .today-temperature{
+        width: 80px;
+    }
+
+    .today-celsius {
+        text-align: center;
+        font-size: 13px;
+        width: 80px;
+    }
+}
+
+@media only screen and (max-width: 421px) {
+    .mapboxgl-ctrl-geocoder--input{
+        width: 100px !important;
+        padding: 0;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-left: 35px;
+    }
+
+    .mapboxgl-ctrl-top-left .mapboxgl-ctrl{
+        width: 100px !important;
+    }
+}
+
+@media only screen and (max-height: 803px) {
+    .waves, .wind{
+        height: 150px;
+    }
+
+    .detailed-spot{
+        animation: 1s slide-up-shortened;
+    }
+
+    @keyframes slide-up-shortened {
+        from {
+            height: 0;
+        }
+        to {
+            height: 680px;
+        }
+      }
+
+}
+
+@media only screen and (max-height: 755px) {
+    .weather{
+        height: 150px;
+    }
+
+    .detailed-spot{
+        animation: 1s slide-up-shortened2;
+    }
+
+    @keyframes slide-up-shortened2 {
+        from {
+            height: 0;
+        }
+        to {
+            height: 650px;
+        }
+      }
+}
+

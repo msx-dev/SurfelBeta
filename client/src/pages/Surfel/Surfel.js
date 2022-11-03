@@ -90,10 +90,16 @@ function Surfel() {
     //Functions
     const pinClicked = (id, lat, long) => {
       //setViewState({...viewState, latitude: lat, longitude: long});
-      mapRef.current?.flyTo({center: [long, lat], duration: 2000});
+      if(window.innerWidth < 418){
+        mapRef.current?.flyTo({center: [long, lat-0.003], duration: 2000});
+      }
+      else{
+        mapRef.current?.flyTo({center: [long, lat], duration: 2000});
+      }
       setClickedId(id);
       setOpenSmall(true);
       setOpenDetails(false);
+      console.log(window.innerWidth)
     }
     
     const addMarker = (e) => {
@@ -171,7 +177,7 @@ function Surfel() {
               <Marker key={pin._id} latitude={pin.lat} longitude={pin.long} onClick={e => {
                   pinClicked(pin._id, pin.lat, pin.long);
                 }}>
-                <IoLocationSharp key={pin._id} color= {currentUser === pin.username ? "white" : "#d27e7c"} size={"25"} cursor={"pointer"}/>
+                <IoLocationSharp key={pin._id} color= {currentUser === pin.username ? "#f5d95d" : "#d27e7c"} size={"25"} cursor={"pointer"}/>
               </Marker>
               {(pin._id === clickedId) && openSmall===true && (
               <div>
