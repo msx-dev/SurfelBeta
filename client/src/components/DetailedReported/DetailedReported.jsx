@@ -60,7 +60,7 @@ export default function DetailedReported({latitude, longitude, setUpdate, setOpe
                 const user = {
                     user_id: userId
                 }
-                const response = await axios.post("/users/ratedPosts", user);
+                const response = await axios.post("http://localhost:5001/api/users/ratedPosts", user);
                 //console.log(response.data.rated);
                 const rated = response.data.rated;
                 
@@ -82,7 +82,7 @@ export default function DetailedReported({latitude, longitude, setUpdate, setOpe
                 const user = {
                     user_id: userId
                 }
-                const response = await axios.post("/users/ratedPosts", user);
+                const response = await axios.post("http://localhost:5001/api/users/ratedPosts", user);
 
                 const rated = response.data.rated;
                 
@@ -410,7 +410,7 @@ export default function DetailedReported({latitude, longitude, setUpdate, setOpe
         }
 
         try {
-            const response = await axios.post("/pins/rate", data);
+            const response = await axios.post("http://localhost:5001/api/pins/rate", data);
         } catch (error) {
             
         }
@@ -422,7 +422,7 @@ export default function DetailedReported({latitude, longitude, setUpdate, setOpe
                 id: pinId
             }
 
-            const response = await axios.post("/pins/deletePin", data);
+            const response = await axios.post("http://localhost:5001/api/pins/deletePin", data);
 
             if(response.status === 200){
                 setOpenDetails(false);
@@ -440,7 +440,7 @@ export default function DetailedReported({latitude, longitude, setUpdate, setOpe
                 id: pinId
             }
 
-            const response = await axios.post("/pins/unreportPin", data);
+            const response = await axios.post("http://localhost:5001/api/pins/unreportPin", data);
             if(response.status === 200){
                 setOpenDetails(false);
                 setUpdate(true);

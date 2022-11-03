@@ -60,7 +60,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                 const user = {
                     user_id: userId
                 }
-                const response = await axios.post("/users/ratedPosts", user);
+                const response = await axios.post("http://localhost:5001/api/users/ratedPosts", user);
                 //console.log(response.data.rated);
                 const rated = response.data.rated;
                 
@@ -82,7 +82,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                 const user = {
                     user_id: userId
                 }
-                const response = await axios.post("/users/ratedPosts", user);
+                const response = await axios.post("http://localhost:5001/api/users/ratedPosts", user);
                 //console.log(response.data.rated);
                 const rated = response.data.rated;
                 
@@ -410,7 +410,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
         }
 
         try {
-            const response = await axios.post("/pins/rate", data);
+            const response = await axios.post("http://localhost:5001/api/pins/rate", data);
         } catch (error) {
             
         }
@@ -422,7 +422,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                 id: pinId
             }
 
-            const response = await axios.post("/pins/report", data);
+            const response = await axios.post("http://localhost:5001/api/pins/report", data);
 
             console.log("Reported Pin!")
         } catch (error) {

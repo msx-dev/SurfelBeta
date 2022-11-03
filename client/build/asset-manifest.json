@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "./static/css/main.7a6de081.css",
+    "main.js": "./static/js/main.529650cd.js",
+    "static/media/AIIoT.jpg": "./static/media/AIIoT.6a8f63a14970a66fe2f0.jpg",
+    "static/media/UserInteraction.jpg": "./static/media/UserInteraction.768664612825dd6966db.jpg",
+    "static/media/MarkerAnalytics.jpg": "./static/media/MarkerAnalytics.2df8341745018aee073f.jpg",
+    "static/media/MarkersSurf3.jpg": "./static/media/MarkersSurf3.0ba2d4b8f1f69f8e2ff3.jpg",
+    "static/media/MarkersBeach.jpg": "./static/media/MarkersBeach.6a11f5d13bb20508c5cf.jpg",
+    "static/media/Namibia.jpg": "./static/media/Namibia.820df4396f652cd5599a.jpg",
+    "static/media/Surfer6.jpeg": "./static/media/Surfer6.b3b1ac65edc5e50294b1.jpeg",
+    "service-worker.js": "./service-worker.js",
+    "static/media/international.png": "./static/media/international.4e4152711745137dd7f2.png",
+    "static/media/LogoFull.png": "./static/media/LogoFull.8a9253b15c388e1188f6.png",
+    "static/media/snap.png": "./static/media/snap.87f279643d045f6c40a1.png",
+    "static/media/responsive.png": "./static/media/responsive.187eab262bf0152599e6.png",
+    "static/media/AIDevice.png": "./static/media/AIDevice.0edd27268737f9a1e696.png",
+    "static/media/AnalyticsFuture.png": "./static/media/AnalyticsFuture.a6dfcb6de5e28d80e149.png",
+    "static/media/Features.png": "./static/media/Features.a6dfcb6de5e28d80e149.png",
+    "static/media/UserBase.png": "./static/media/UserBase.81f8c98357660421ef15.png",
+    "static/media/free.png": "./static/media/free.2381799851d3359c3afa.png",
+    "static/media/4.svg": "./static/media/4.aa01f716288eeaae855f256e33323646.svg",
+    "static/media/2.svg": "./static/media/2.b09e5cf69a048175d6c375304da5f256.svg",
+    "static/media/1.svg": "./static/media/1.8a695b8b6d5bb48b147fc258816cc115.svg",
+    "static/media/8.svg": "./static/media/8.080ccd98d5354c0e547a98cf85ecdb40.svg",
+    "static/media/5.svg": "./static/media/5.5b811c8dcf47e4fec0d1e7faef90b43a.svg",
+    "static/media/9.svg": "./static/media/9.92ae35c0fe833007061e3b84b4abd9ee.svg",
+    "static/media/3.svg": "./static/media/3.f630f4eeffb6e2e929909f66cfd814a2.svg",
+    "static/media/7.svg": "./static/media/7.fbd76368b86f87d71278de20e911afab.svg",
+    "static/media/6.svg": "./static/media/6.798c1a32b040749150ec30053da82ec2.svg",
+    "static/media/10.svg": "./static/media/10.b94c7537f6e94db14ac21499a17d4659.svg",
+    "index.html": "./index.html",
+    "main.7a6de081.css.map": "./static/css/main.7a6de081.css.map",
+    "main.529650cd.js.map": "./static/js/main.529650cd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7a6de081.css",
+    "static/js/main.529650cd.js"
+  ]
+}

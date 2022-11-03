@@ -51,7 +51,7 @@ function Surfel() {
     useEffect(()=> {
       const getPins = async () => {
         try {
-          const response = await axios.get("/pins");
+          const response = await axios.get("http://localhost:5001/api/pins");
           setPins(response.data);
         } catch (error) {
           console.log(error);

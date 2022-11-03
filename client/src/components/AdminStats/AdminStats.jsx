@@ -27,7 +27,7 @@ export default function AdminStats() {
     useEffect(()=>{
         const getAllUsers = async () => {
             try {
-               const response =  await axios.get("users/allUsers");
+               const response =  await axios.get("http://localhost:5001/api/users/allUsers");
 
                setAllUsers(response.data);
             } catch (error) {
@@ -37,7 +37,7 @@ export default function AdminStats() {
 
         const getReportedPins = async () => {
             try {
-              const response = await axios.get("pins/reportedPins");
+              const response = await axios.get("http://localhost:5001/api/pins/reportedPins");
              
               setReportedPins(response.data.length);
             } catch (error) {
@@ -47,7 +47,7 @@ export default function AdminStats() {
 
         const getAllPins = async () => {
             try {
-               const response =  await axios.get("pins/allPins");
+               const response =  await axios.get("http://localhost:5001/api/pins/allPins");
                setAllPins(response.data);
             } catch (error) {
                 console.log(error);
@@ -59,7 +59,7 @@ export default function AdminStats() {
             try {
                 
 
-                const response = await axios.get("/pins/new_date");
+                const response = await axios.get("http://localhost:5001/api/pins/new_date");
                 //console.log(response.data.rated);
                 const monthlyPins = response.data;
 
@@ -77,7 +77,7 @@ export default function AdminStats() {
         const getUsersByMonth = async () => {
             
             try {
-                const response = await axios.get("/users/date");
+                const response = await axios.get("http://localhost:5001/api/users/date");
                 //console.log(response.data.rated);
                 const monthlyUsers = response.data;
 

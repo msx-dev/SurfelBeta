@@ -21,7 +21,7 @@ export default function NearbySpots({setOpenNearby, viewState, pinClicked}) {
                     longitude: longitude
                 }
 
-                const response = await axios.post("/pins/nearby", loc_data);
+                const response = await axios.post("http://localhost:5001/api/pins/nearby", loc_data);
                 //console.log(response.data.rated);
                 const nearbySpots = response.data;
 

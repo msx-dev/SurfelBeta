@@ -19,7 +19,7 @@ export default function ReportedSpots({viewState, pinClicked, setOpenNearby}) {
             try {
                 
 
-                const response = await axios.get("/pins/reportedPins");
+                const response = await axios.get("http://localhost:5001/api/pins/reportedPins");
                 //console.log(response.data.rated);
                 const reported_spots = response.data;
 

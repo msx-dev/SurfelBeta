@@ -17,7 +17,7 @@ export default function Login({storedData, setCurrentUser, setLogin, setAvatar, 
         }
 
         try {
-            const response = await axios.post("/users/login", loginUser);
+            const response = await axios.post("http://localhost:5001/api/users/login", loginUser);
             
             if(response.data.user_type === "user"){
                 storedData.setItem("user", response.data.username);

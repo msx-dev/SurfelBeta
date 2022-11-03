@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
@@ -15,6 +17,16 @@
     <title>SurfLog</title>
   </head>
   <body>
+    <script>
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker
+						.register('./serviceWorker.js')
+						.then((reg) => console.log('Success: ', reg.scope))
+						.catch((err) => console.log('Failure: ', err));
+				});
+			}
+		</script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     
