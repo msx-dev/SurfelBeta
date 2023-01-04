@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.7a6de081.css",
-    "main.js": "./static/js/main.04d4c07e.js",
+    "main.css": "./static/css/main.3a11fefb.css",
+    "main.js": "./static/js/main.1e27f2ae.js",
     "static/media/AIIoT.jpg": "./static/media/AIIoT.6a8f63a14970a66fe2f0.jpg",
     "static/media/UserInteraction.jpg": "./static/media/UserInteraction.768664612825dd6966db.jpg",
     "static/media/MarkerAnalytics.jpg": "./static/media/MarkerAnalytics.2df8341745018aee073f.jpg",
@@ -31,11 +31,11 @@
     "static/media/6.svg": "./static/media/6.798c1a32b040749150ec30053da82ec2.svg",
     "static/media/10.svg": "./static/media/10.b94c7537f6e94db14ac21499a17d4659.svg",
     "index.html": "./index.html",
-    "main.7a6de081.css.map": "./static/css/main.7a6de081.css.map",
-    "main.04d4c07e.js.map": "./static/js/main.04d4c07e.js.map"
+    "main.3a11fefb.css.map": "./static/css/main.3a11fefb.css.map",
+    "main.1e27f2ae.js.map": "./static/js/main.1e27f2ae.js.map"
   },
   "entrypoints": [
-    "static/css/main.7a6de081.css",
-    "static/js/main.04d4c07e.js"
+    "static/css/main.3a11fefb.css",
+    "static/js/main.1e27f2ae.js"
   ]
 }

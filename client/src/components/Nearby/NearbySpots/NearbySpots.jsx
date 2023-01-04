@@ -7,8 +7,7 @@ import NearbyCard from "../NearbyCard/NearbyCard";
 
 
 export default function NearbySpots({setOpenNearby, viewState, pinClicked}) {
-    const [latitude, setLatitude] = useState(viewState.latitude);
-    const [longitude, setLongitude] = useState(viewState.longitude);
+    const storedData = window.localStorage;
     const [nearby, setNearby] = useState([]);
 
     //Get nearby spots
@@ -17,11 +16,13 @@ export default function NearbySpots({setOpenNearby, viewState, pinClicked}) {
             
             try {
                 const loc_data = {
-                    latitude: latitude,
-                    longitude: longitude
+                    latitude: Number(storedData.getItem("latitude")),
+                    longitude: Number(storedData.getItem("longitude"))
                 }
 
-                const response = await axios.post("http://localhost:5001/api/pins/nearby", loc_data);
+                
+
+                const response = await axios.post("http://192.168.0.30:5001/api/pins/nearby", loc_data);
                 //console.log(response.data.rated);
                 const nearbySpots = response.data;
 

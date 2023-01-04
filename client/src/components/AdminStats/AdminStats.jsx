@@ -6,6 +6,8 @@ import GrowthChartPos from "../Charts/GrowthCharts/GrowthChartPos";
 import UserChart from "../Charts/UserCharts/UserChart";
 import PinChart from "../Charts/PinCharts/PinChart";
 import GrowthChartNeg from "../Charts/GrowthCharts/GrowthChartNeg";
+import PopupChart from "../Charts/PopupChart/PopupChart";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 
 export default function AdminStats() {
@@ -19,6 +21,7 @@ export default function AdminStats() {
     const [newPinsGrowthAbs, setNewPinsGrowthAbs] = useState(0);
     const [newUsersGrowthAbs, setNewUsersGrowthAbs] = useState(0);
     const [reportedPins, setReportedPins] = useState([]);
+    const [openChart, setOpenChart] = useState("");
 
     const d = new Date();
     let month = d.getMonth();
@@ -27,7 +30,7 @@ export default function AdminStats() {
     useEffect(()=>{
         const getAllUsers = async () => {
             try {
-               const response =  await axios.get("http://localhost:5001/api/users/allUsers");
+               const response =  await axios.get("http://192.168.0.30:5001/api/users/allUsers");
 
                setAllUsers(response.data);
             } catch (error) {
@@ -37,7 +40,7 @@ export default function AdminStats() {
 
         const getReportedPins = async () => {
             try {
-              const response = await axios.get("http://localhost:5001/api/pins/reportedPins");
+              const response = await axios.get("http://192.168.0.30:5001/api/pins/reportedPins");
              
               setReportedPins(response.data.length);
             } catch (error) {
@@ -117,7 +120,7 @@ export default function AdminStats() {
         </div>
     */} 
         <div className="admin-stat">
-            <div className="admin-stat-chart">
+            <div className="admin-stat-chart" onClick={()=>setOpenChart("users")}>
                 <UserChart/>
             </div>
             <div className="admin-stat-right">
@@ -133,10 +136,12 @@ export default function AdminStats() {
                 </div>
             </div>
         </div>
+
+        {openChart==="pins" ? <PopupChart chart={PinChart} setOpenChart={setOpenChart}/> : openChart==="users" ? <PopupChart chart={UserChart} setOpenChart={setOpenChart}/> : <></>}
        
 
         <div className="admin-stat">
-            <div className="admin-stat-chart">
+            <div className="admin-stat-chart" onClick={()=>setOpenChart("pins")}>
                 <PinChart/>
             </div>
             <div className="admin-stat-right">

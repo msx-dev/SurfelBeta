@@ -31,7 +31,7 @@ export default function NewSurfSpot({storedData, setPins, pins, newPin, setNewPi
         }
   
         try {
-          const response = await axios.post("http://localhost:5001/api/pins", savePin);
+          const response = await axios.post("http://192.168.0.30:5001/api/pins", savePin);
           setPins([...pins, response.data]);
           setNewPin(null);
           setNewSpot(false);

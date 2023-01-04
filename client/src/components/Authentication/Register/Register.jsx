@@ -38,7 +38,7 @@ export default function Register({setRegister, storedData, setCurrentUser, setAv
         
 
         try {
-            const response = await axios.post("http://localhost:5001/api/users/register", registerUser);
+            const response = await axios.post("http://192.168.0.30:5001/api/users/register", registerUser);
             console.log(response.status);
             if(response.status === 200){
                 setSuccess(true);

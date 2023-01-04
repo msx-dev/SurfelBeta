@@ -26,8 +26,8 @@ function Surfel() {
   const [viewState, setViewState] = useState({
         width: "100vw",
         height: "100vh",
-        latitude: 29.116021063495054,
-        longitude: -13.553147307415657,
+        latitude: storedData.getItem("latitude"),
+        longitude: storedData.getItem("longitude"),
         zoom: 14,
         pitch: 67,
         bearing: 50
@@ -53,7 +53,7 @@ function Surfel() {
     useEffect(()=> {
       const getPins = async () => {
         try {
-          const response = await axios.get("http://localhost:5001/api/pins");
+          const response = await axios.get("http://192.168.0.30:5001/api/pins");
           setPins(response.data);
         } catch (error) {
           console.log(error);
@@ -62,6 +62,10 @@ function Surfel() {
       getPins();
     }, [])
 
+    useEffect(()=>{
+      storedData.setItem("longitude", viewState.longitude)
+      storedData.setItem("latitude", viewState.latitude)
+    }, [viewState])
     
 
 
@@ -179,7 +183,7 @@ function Surfel() {
               <Marker key={pin._id} latitude={pin.lat} longitude={pin.long} onClick={e => {
                   pinClicked(pin._id, pin.lat, pin.long);
                 }}>
-                <IoLocationSharp key={pin._id} color= {currentUser === pin.username ? "#f5d95d" : "#d27e7c"} size={"25"} cursor={"pointer"}/>
+                <IoLocationSharp key={pin._id} color= {currentUser === pin.username ? "#f5d95d" : "#d27e7c"} size={45} cursor={"pointer"}/>
               </Marker>
               {(pin._id === clickedId) && openSmall===true && (
               <div>

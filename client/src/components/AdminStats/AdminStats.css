@@ -37,6 +37,7 @@
     border-radius: 12px;
     padding: 10px;
     max-width: 480px;
+    cursor: pointer;
 }
 
 .admin-stat-all{

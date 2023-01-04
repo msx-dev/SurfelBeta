@@ -60,7 +60,7 @@ export default function SpotDetailed({latitude, longitude, setOpenDetails, pinId
                 const user = {
                     user_id: userId
                 }
-                const response = await axios.post("http://localhost:5001/api/users/ratedPosts", user);
+                const response = await axios.post("http://192.168.0.30:5001/api/users/ratedPosts", user);
                 //console.log(response.data.rated);
                 const rated = response.data.rated;
                 
